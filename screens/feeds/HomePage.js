@@ -8,7 +8,10 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 function Map() {
     return (
     <View style={styles.container}>
-        <MapView style={styles.mapStyle} />
+        <MapView 
+        style={styles.mapStyle} 
+        showsUserLocation
+        showsMyLocationButton/>
       </View>
     );
   }
