@@ -1,8 +1,9 @@
 import React from 'react';
 import DatePicker from 'react-native-datepicker';
 import RNPickerSelect, { defaultStyles } from 'react-native-picker-select';  //npm install react-native-picker-select
-import { StyleSheet, Text, View, Picker, TextInput, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, Picker, TextInput, TouchableOpacity, ScrollView, SafeAreaView, Button } from 'react-native';
 import moment from 'moment';
+import global from '../global';
 
 const gender = [
   {
@@ -19,7 +20,7 @@ const gender = [
   },
 ];
 
-export default class App extends React.Component {
+export default class SignUpScreen extends React.Component {
   constructor(props) {
     super(props);
 
@@ -29,14 +30,44 @@ export default class App extends React.Component {
     };
     this.state = {
       selectedGender: undefined,
+      email: "",
+      username: "",
+      password: "",
+      error: '',
+      dateofbirth: "",
+      loading: false,
     };
   }
 
   state = {
+    username: "",
     email: "",
     password: "",
   }
 
+  onConfirmPress() {
+    this.setState({ error: '', loading: true });
+
+    const { email, password } = this.state;
+    global.firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then(() => {
+        this.setState({ error: '', loading: false });
+        alert("Signed up");
+      })
+      .catch(() => {
+        this.setState({ error: 'Error', loading: false });
+      })
+  }
+  renderButtonOrLoading() {
+    if (this.state.loading) {
+      return <Text>Loading</Text>
+    }
+    return <TouchableOpacity
+      style={styles.loginBtn}
+      onPress={this.onConfirmPress.bind(this)}>
+      <Text> Confirm </Text>
+    </TouchableOpacity>
+  }
   render() {
     const placeholder = {
       label: 'Select gender',
@@ -124,10 +155,8 @@ export default class App extends React.Component {
             this.inputRefs.selectedGender = el;
           }}
         />
-        <TouchableOpacity
-          style={styles.loginBtn}>
-          <Text> Confirm </Text>
-        </TouchableOpacity>
+        <Text>{this.state.error}</Text>
+        {this.renderButtonOrLoading()}
       </SafeAreaView>
     );
   }
