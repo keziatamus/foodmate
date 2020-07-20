@@ -6,20 +6,20 @@ import SignUpScreen from './screens/SignUpScreen';
 import ForgotPassword from './screens/ForgotPassword';
 import CodeConfirmation  from './screens/CodeConfirmation'; 
 import HomePage from './screens/feeds/HomePage'; 
-import UserProfile from './screens/feeds/UserProfile'; 
+import CreateEvent from './screens/feeds/CreateEvent'; 
 
 const Stack = createStackNavigator();
 
 function App() {
     return (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Profile"> 
+        <Stack.Navigator initialRouteName="Create"> 
           <Stack.Screen name="Log In" component={LoginScreen}/>
           <Stack.Screen name="Sign Up" component={SignUpScreen}/>
           <Stack.Screen name="Forgot Password" component={ForgotPassword}/>  
           <Stack.Screen name="Code Confirmation" component={CodeConfirmation}/>  
           <Stack.Screen name="Foodmate" component={HomePage}/>
-          <Stack.Screen name="Profile" component={UserProfile}/>
+          <Stack.Screen name="Create" component={CreateEvent}/>
           </Stack.Navigator>
       </NavigationContainer>
     );
