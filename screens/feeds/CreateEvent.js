@@ -1,7 +1,4 @@
-
-import React, {useState} from 'react';
-import DateTimePickerModal from "react-native-modal-datetime-picker";
-import RNPickerSelect, { defaultStyles } from 'react-native-picker-select';  //npm install react-native-picker-select
+import React from 'react';
 import DatePicker from 'react-native-datepicker';
 import { StyleSheet, Text, View, Button, TextInput, TouchableOpacity, SafeAreaView } from 'react-native';
 import moment from 'moment';
