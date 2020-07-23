@@ -1,28 +1,10 @@
 import * as React from 'react';
-import MapView from 'react-native-maps';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
-
-function Map() {
-    return (
-    <View style={styles.container}>
-        <MapView 
-        style={styles.mapStyle} 
-        showsUserLocation
-        showsMyLocationButton/>
-      </View>
-    );
-  }
-
-function Create() {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Create!</Text>
-      </View>
-    );
-  }
+import MapScreen from '../MapScreen';
+import CreateScreen from './CreateEvent';
 
 function Home() {
   return (
@@ -53,14 +35,14 @@ const Tab = createBottomTabNavigator();
 export default function MyTabs() {
   return (
     <Tab.Navigator
-      initialRouteName="Feed"
+      initialRouteName="Map"
       tabBarOptions={{
         activeTintColor: '#FBAF02',
       }}
     >
     <Tab.Screen
         name="Map"
-        component={Map}
+        component={MapScreen}
         options={{
           tabBarLabel: 'Map',
           tabBarIcon: ({ color, size }) => (
@@ -70,7 +52,7 @@ export default function MyTabs() {
       />
     <Tab.Screen
         name="Create"
-        component={Create}
+        component={CreateScreen}
         options={{
           tabBarLabel: 'Create',
           tabBarIcon: ({ color, size }) => (
