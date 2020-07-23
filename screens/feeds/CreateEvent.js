@@ -193,29 +193,3 @@ const styles = StyleSheet.create({
   },
 
 });
-
-const pickerSelectStyles = StyleSheet.create({
-  placeholder: {
-    color: '#707070',
-  },
-  inputIOS: {
-    alignSelf: 'center',
-    width: '80%',
-    backgroundColor: "#FAF7F0",
-    borderRadius: 20,
-    padding: 20,
-    fontSize: 15,
-    paddingVertical: 12,
-    paddingRight: 30, // to ensure the text is never behind the icon
-  },
-  inputAndroid: {
-    alignSelf: 'center',
-    width: '80%',
-    backgroundColor: "#FAF7F0",
-    borderRadius: 20,
-    padding: 20,
-    fontSize: 15,
-    paddingVertical: 12,
-    paddingRight: 30, // to ensure the text is never behind the icon
-  },
-});
