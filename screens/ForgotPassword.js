@@ -22,7 +22,7 @@ export default class App extends React.Component {
             onChangeText={text => this.setState({email:text})}/>
         </View>
         <TouchableOpacity style={styles.button}>
-        <Text onPress={() => this.props.navigation.navigate('Sign Up')}
+        <Text onPress={() => this.props.navigation.navigate('Code Confirmation')}
         style={styles.loginText}>
             Next
         </Text>
