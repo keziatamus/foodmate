@@ -9,6 +9,8 @@ export default function MapScreen(props) {
 
     useEffect(() => {
         getUserPosition();
+
+        // props.navigation.navigate('Create');
     }, []);
 
     useEffect(() => {
