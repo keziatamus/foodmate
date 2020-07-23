@@ -1,7 +1,8 @@
 import React from 'react';
 import DatePicker from 'react-native-datepicker';
-import { StyleSheet, Text, View, Button, TextInput, TouchableOpacity, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, SafeAreaView } from 'react-native';
 import moment from 'moment';
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
 export default class App extends React.Component {
     constructor(){
@@ -57,7 +58,7 @@ export default class App extends React.Component {
           style={styles.inputView}
           date={this.state.date}
           mode="date"
-          placeholder="Select"
+          placeholder="Select date"
           format="DD-MM-YYYY"
           minDate={moment().format('DD-MM-YYYY')}
           confirmBtnText="Confirm"
@@ -112,6 +113,32 @@ export default class App extends React.Component {
             this.setState({ date: date });
           }}
         />
+
+      <GooglePlacesAutocomplete
+        query={{
+          key: 'AIzaSyB9FOMICSBQTS3I8QYabTulbXu8YUqXDVs',
+          language: 'en',
+        }}
+        onPress={(data, details = null) => console.log(data)}
+        onFail={error => console.error(error)}
+        
+        styles={{
+          textInputContainer: {
+            width: "80%",
+            backgroundColor: "#FAF7F0",
+            borderRadius: 20,
+            height: 20,
+            marginBottom: 20,
+            justifyContent: "center",
+            padding: 20
+          },
+          textInput: {
+            height: 50,
+            color: "black"
+          },
+        }}
+      />
+
         <TouchableOpacity
           style={styles.loginBtn}>
           <Text> Confirm </Text>
@@ -127,7 +154,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
-
   },
   inputView: {
     width: "80%",
