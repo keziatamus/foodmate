@@ -29,12 +29,13 @@ export default class SignUpScreen extends React.Component {
       selectedGender0: null,
     };
     this.state = {
-      selectedGender: undefined,
       email: "",
       username: "",
       password: "",
       error: '',
-      dateofbirth: "",
+      date: "",
+      UID: "",
+      selectedGender: undefined,
       loading: false,
     };
   }
@@ -45,18 +46,61 @@ export default class SignUpScreen extends React.Component {
     password: "",
   }
 
+
+  storeInFirebase() {
+    global.firebase.database().ref('user').push(
+      {
+        username: this.state.username,
+        email: this.state.email,
+        dob: this.state.date,
+        gender: this.state.selectedGender,
+      }
+    )
+  };
+
   onConfirmPress() {
     this.setState({ error: '', loading: true });
+    if (this.state.username == '') {
+      alert('Username is required')
+      this.setState({ loading: false });
+    }
+    else if (this.state.email == '') {
+      alert('E-mail is required')
+      this.setState({ loading: false });
+    }
+    else if (this.state.password == '') {
+      alert('Password is required')
+      this.setState({ loading: false });
+    }
+    else if (this.state.password.length < 6) {
+      alert('Password must contain 6 or more characters')
+      this.setState({ loading: false });
+    }
+    else if (this.state.date == '') {
+      alert('Please input Date of birth')
+      this.setState({ loading: false });
+    }
+    else if (this.state.selectedGender == undefined) {
+      alert('Please input Gender')
+      this.setState({ loading: false });
+    }
+    else {
+      const { email, password } = this.state;
+      global.firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then(() => {
+          this.setState({ error: '', loading: false });
+          this.storeInFirebase();
+          alert("Signed up");
 
-    const { email, password } = this.state;
-    global.firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then(() => {
-        this.setState({ error: '', loading: false });
-        alert("Signed up");
-      })
-      .catch(() => {
-        this.setState({ error: 'Error', loading: false });
-      })
+        })
+        .catch(() => {
+          this.setState({ error: '', loading: false });
+          alert("The user with this email is already existed.")
+        });
+
+    }
+
+
   }
   renderButtonOrLoading() {
     if (this.state.loading) {
@@ -93,6 +137,7 @@ export default class SignUpScreen extends React.Component {
             style={styles.inputText}
             placeholder="Email"
             placeholderTextColor="#707070"
+            keyboardType="email-address"
             onChangeText={text => this.setState({ email: text })} />
         </View>
         <View style={styles.inputView} >
@@ -128,7 +173,6 @@ export default class SignUpScreen extends React.Component {
             placeholderText: {
               color: "#707070"
             }
-
           }}
           onDateChange={(date) => {
             this.setState({ date: date });
