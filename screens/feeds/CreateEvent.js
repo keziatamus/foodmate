@@ -37,6 +37,14 @@ export default class App extends React.Component {
           <Text style={styles.signUpText}> Create Event</Text>
         </View>
         <View style={styles.inputView} >
+          <Text
+            style={styles.locationText}
+            onPress={() => this.props.navigation.navigate('Select Category')}>
+              Category
+            </Text>
+        </View>
+
+        <View style={styles.inputView} >
           <TextInput
             style={styles.inputText}
             placeholder="Title"
@@ -75,7 +83,6 @@ export default class App extends React.Component {
             placeholderText: {
               color: "#707070"
             }
-
           }}
           onDateChange={(date) => {
             this.setState({ date: date });
@@ -137,7 +144,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: "black",
     fontWeight: 'bold',
-    marginTop: 30,
+    marginTop: 10,
     marginBottom: 10
   },
   signUpView: {
