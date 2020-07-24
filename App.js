@@ -9,6 +9,7 @@ import HomePage from './screens/feeds/HomePage';
 import CreateEvent from './screens/feeds/CreateEvent';
 import MapScreen from './screens/MapScreen';
 import Tabs from './screens/feeds/HomePage';
+import InputLocation from './screens/feeds/InputLocation'; 
 
 const Stack = createStackNavigator();
 
@@ -24,6 +25,7 @@ function App() {
         <Stack.Screen name="Foodmate" component={HomePage} />
         <Stack.Screen name="Create" component={CreateEvent} />
         <Stack.Screen name="Map" component={MapScreen} />
+        <Stack.Screen name="Input Location" component={InputLocation}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
