@@ -2,7 +2,6 @@ import React from 'react';
 import DatePicker from 'react-native-datepicker';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, SafeAreaView } from 'react-native';
 import moment from 'moment';
-import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
 export default class App extends React.Component {
     constructor(){
@@ -114,30 +113,13 @@ export default class App extends React.Component {
           }}
         />
 
-      <GooglePlacesAutocomplete
-        query={{
-          key: 'AIzaSyB9FOMICSBQTS3I8QYabTulbXu8YUqXDVs',
-          language: 'en',
-        }}
-        onPress={(data, details = null) => console.log(data)}
-        onFail={error => console.error(error)}
-        
-        styles={{
-          textInputContainer: {
-            width: "80%",
-            backgroundColor: "#FAF7F0",
-            borderRadius: 20,
-            height: 20,
-            marginBottom: 20,
-            justifyContent: "center",
-            padding: 20
-          },
-          textInput: {
-            height: 50,
-            color: "black"
-          },
-        }}
-      />
+        <View style={styles.inputView} >
+          <Text
+            style={styles.locationText}
+            onPress={() => this.props.navigation.navigate('Input Location')}>
+              Select location
+            </Text>
+        </View>
 
         <TouchableOpacity
           style={styles.loginBtn}>
@@ -186,10 +168,14 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: "black",
     fontWeight: 'bold',
-    marginBottom: 30
+    marginTop: 30,
+    marginBottom: 10
   },
   signUpView: {
     paddingBottom: 30,
   },
-
+  locationText:{
+    height: 20,
+    color: "#707070"
+  }
 });
