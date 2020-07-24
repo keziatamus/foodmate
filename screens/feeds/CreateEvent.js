@@ -1,7 +1,7 @@
 import React from 'react';
-import DatePicker from 'react-native-datepicker';
+import DatePicker from 'react-native-datepicker'; //npm install react-native-datepicker --save
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, SafeAreaView } from 'react-native';
-import moment from 'moment';
+import moment from 'moment'; //npm install moment --save
 
 export default class App extends React.Component {
     constructor(){
@@ -56,41 +56,10 @@ export default class App extends React.Component {
           androidMode="spinner"
           style={styles.inputView}
           date={this.state.date}
-          mode="date"
-          placeholder="Select date"
-          format="DD-MM-YYYY"
-          minDate={moment().format('DD-MM-YYYY')}
-          confirmBtnText="Confirm"
-          cancelBtnText="Cancel"
-          customStyles={{
-            dateInput: {
-              backgroundColor: "#FAF7F0",
-              borderRadius: 20,
-              borderLeftWidth: 0,
-              borderRightWidth: 0,
-              borderTopWidth: 0,
-              borderBottomWidth: 0,
-              alignItems: 'flex-start',
-            },
-            placeholderText: {
-              color: "#707070"
-            }
-
-          }}
-          onDateChange={(date) => {
-            this.setState({ date: date });
-          }}
-        />
-
-        <DatePicker
-          showIcon={false}
-          androidMode="spinner"
-          style={styles.inputView}
-          date={this.state.date}
-          mode="time"
-          placeholder="Select time"
-          format="DD-MM-YYYY"
-          minDate={moment().format('DD-MM-YYYY')}
+          mode="datetime"
+          placeholder="Date and time"
+          format="MMMM Do, H:MM"
+          minDate={moment().format('MMMM Do, H:MM')}
           confirmBtnText="Confirm"
           cancelBtnText="Cancel"
           customStyles={{
@@ -117,7 +86,7 @@ export default class App extends React.Component {
           <Text
             style={styles.locationText}
             onPress={() => this.props.navigation.navigate('Input Location')}>
-              Select location
+              Location
             </Text>
         </View>
 
@@ -157,7 +126,7 @@ const styles = StyleSheet.create({
     height: 50,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 40,
+    marginTop: 20,
     marginBottom: 10
   },
   buttonText: {
