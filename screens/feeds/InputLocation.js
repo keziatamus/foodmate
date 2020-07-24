@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
@@ -23,9 +23,9 @@ const App = () => {
           textInput: {
             marginLeft: 0,
             marginRight: 0,
-            height: 38,
+            height: 40,
             color: "#707070",
-            fontSize: 16,
+            fontSize: 14,
           },
           predefinedPlacesDescription: {
             color: '#f5c867',
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingTop: Constants.statusBarHeight,
     backgroundColor: '#FAF7F0',
-    padding: 8,
+    padding: 20,
   },
 });
 
