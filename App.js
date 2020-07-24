@@ -10,13 +10,14 @@ import CreateEvent from './screens/feeds/CreateEvent';
 import MapScreen from './screens/MapScreen';
 import Tabs from './screens/feeds/HomePage';
 import InputLocation from './screens/feeds/InputLocation'; 
+import SelectCategory from './screens/feeds/SelectCategory'; 
 
 const Stack = createStackNavigator();
 
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Tabs">
+      <Stack.Navigator initialRouteName="Foodmate">
         <Stack.Screen name="Tabs" component={Tabs} options={{ headerShown: false }} />
         <Stack.Screen name="Log In" component={LoginScreen} />
         <Stack.Screen name="Sign Up" component={SignUpScreen} />
@@ -26,6 +27,7 @@ function App() {
         <Stack.Screen name="Create" component={CreateEvent} />
         <Stack.Screen name="Map" component={MapScreen} />
         <Stack.Screen name="Input Location" component={InputLocation}/>
+        <Stack.Screen name="Select Category" component={SelectCategory}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
