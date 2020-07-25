@@ -2,12 +2,58 @@ import React from 'react';
 import DatePicker from 'react-native-datepicker'; //npm install react-native-datepicker --save
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, SafeAreaView } from 'react-native';
 import moment from 'moment'; //npm install moment --save
+import RNPickerSelect, { defaultStyles } from 'react-native-picker-select';  //npm install react-native-picker-select
+
+const tags = [{
+  label: 'American',
+  value: 'American'
+}, {
+  label: 'Italian',
+  value: 'Italian'
+}, {
+  label: 'French',
+  value: 'French'
+}, {
+  label: 'Spanish',
+  value: 'Spanish'
+}, {
+  label: 'Mexican',
+  value: 'Mexican'
+}, {
+  label: 'Korean',
+  value: 'Korean'
+}, {
+  label: 'Japenese',
+  value: 'Japanese'
+}, {
+  label: 'Chinese',
+  value: 'Chinese'
+}, {
+  label: 'Taiwanese',
+  value: 'Taiwanese',
+}, {
+  label: 'Thai',
+  value: 'Thai',
+}, {
+  label: 'Indian',
+  value: 'Indian',
+}, {
+  label: 'Indonesian',
+  value: 'Indonesian'
+}]
 
 export default class App extends React.Component {
     constructor(){
         super()
+
+        this.inputRefs = {
+          selectedTag: null,
+          selectedTag: null,
+        };
+
         this.state = {
-            isVisible: false
+            isVisible: false,
+            selectedTag: undefined,
         }
     }
 
@@ -29,20 +75,38 @@ export default class App extends React.Component {
   }
 
   render() {
-
+    const placeholder = {
+      label: 'Category',
+      value: null,
+      color: '#9EA0A4'
+    }
     return (
 
       <SafeAreaView style={styles.container}>
         <View style={styles.signUpView}>
           <Text style={styles.signUpText}> Create Event</Text>
         </View>
-        <View style={styles.inputView} >
-          <Text
-            style={styles.locationText}
-            onPress={() => this.props.navigation.navigate('Select Category')}>
-              Category
-            </Text>
-        </View>
+
+        <RNPickerSelect
+          placeholder={placeholder}
+          items={tags}
+          onValueChange={value => {
+            this.setState({
+              selectedTag: value,
+            });
+          }}
+          onUpArrow={() => {
+            this.inputRefs.firstTextInput.focus();
+          }}
+          onDownArrow={() => {
+            this.inputRefs.selectedTag0.togglePicker();
+          }}
+          style={pickerSelectStyles}
+          value={this.state.selectedTag}
+          ref={el => {
+            this.inputRefs.selectedTag = el;
+          }}
+        />
 
         <View style={styles.inputView} >
           <TextInput
@@ -154,4 +218,32 @@ const styles = StyleSheet.create({
     height: 20,
     color: "#707070"
   }
+});
+
+const pickerSelectStyles = StyleSheet.create({
+  placeholder: {
+    color: '#707070',
+    marginBottom: 20,
+    fontSize: 14,
+  },
+  inputIOS: {
+    alignSelf: 'center',
+    width: '80%',
+    backgroundColor: "#FAF7F0",
+    borderRadius: 20,
+    padding: 20,
+    fontSize: 15,
+    paddingVertical: 12,
+    paddingRight: 30, // to ensure the text is never behind the icon
+  },
+  inputAndroid: {
+    alignSelf: 'center',
+    width: '80%',
+    backgroundColor: "#FAF7F0",
+    borderRadius: 20,
+    padding: 20,
+    fontSize: 15,
+    paddingVertical: 12,
+    paddingRight: 30, // to ensure the text is never behind the icon
+  },
 });
