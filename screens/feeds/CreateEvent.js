@@ -42,18 +42,38 @@ const tags = [{
   value: 'Indonesian'
 }]
 
+const member = [{
+  label: '1',
+  value: '1'
+}, {
+  label: '2',
+  value: '2'
+}, {
+  label: '3',
+  value: '3'
+}, {
+  label: '4',
+  value: '4'
+}, {
+  label: '5',
+  value: '5'
+}]
+
 export default class App extends React.Component {
     constructor(){
         super()
 
         this.inputRefs = {
           selectedTag: null,
-          selectedTag: null,
+          selectedTag0: null,
+          selectedMember: null,
+          selectedMember0: null,
         };
 
         this.state = {
             isVisible: false,
             selectedTag: undefined,
+            selectedMember: undefined,
         }
     }
 
@@ -80,6 +100,13 @@ export default class App extends React.Component {
       value: null,
       color: '#9EA0A4'
     }
+
+    const placeholder_2 = {
+      label: 'Members',
+      value: null,
+      color: '#9EA0A4'
+    }
+
     return (
 
       <SafeAreaView style={styles.container}>
@@ -153,6 +180,27 @@ export default class App extends React.Component {
           }}
         />
 
+        <RNPickerSelect
+          placeholder={placeholder_2}
+          items={member}
+          onValueChange={value => {
+            this.setState({
+              selectedMember: value,
+            });
+          }}
+          onUpArrow={() => {
+            this.inputRefs.firstTextInput.focus();
+          }}
+          onDownArrow={() => {
+            this.inputRefs.selectedMember0.togglePicker();
+          }}
+          style={pickerSelectStyles}
+          value={this.state.selectedMember}
+          ref={el => {
+            this.inputRefs.selectedMember = el;
+          }}
+        />
+
         <View style={styles.inputView} >
           <Text
             style={styles.locationText}
@@ -160,7 +208,7 @@ export default class App extends React.Component {
               Location
             </Text>
         </View>
-
+        
         <TouchableOpacity
           style={styles.loginBtn}>
           <Text> Confirm </Text>
