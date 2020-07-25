@@ -204,7 +204,7 @@ export default class App extends React.Component {
         <View style={styles.inputView} >
           <Text
             style={styles.locationText}
-            onPress={() => this.props.navigation.navigate('Input Location')}>
+            onPress={() => this.props.navigation.navigate('Choose Restaurant')}>
               Location
             </Text>
         </View>
@@ -282,6 +282,7 @@ const pickerSelectStyles = StyleSheet.create({
     padding: 20,
     fontSize: 15,
     paddingVertical: 12,
+    marginBottom: 20,
     paddingRight: 30, // to ensure the text is never behind the icon
   },
   inputAndroid: {
@@ -292,6 +293,7 @@ const pickerSelectStyles = StyleSheet.create({
     padding: 20,
     fontSize: 15,
     paddingVertical: 12,
+    marginBottom: 20,
     paddingRight: 30, // to ensure the text is never behind the icon
   },
 });
