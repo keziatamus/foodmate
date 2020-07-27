@@ -205,7 +205,7 @@ export default class App extends React.Component {
           <Text
             style={styles.locationText}
             onPress={() => this.props.navigation.navigate('Choose Restaurant')}>
-              Location
+              Restaurant
             </Text>
         </View>
         
