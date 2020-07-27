@@ -4,15 +4,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import MapScreen from '../MapScreen';
+import HomeScreen from './HomeScreen';
 import CreateScreen from './CreateEvent';
-
-function Home() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Feed!</Text>
-    </View>
-  );
-}
 
 function Profile() {
   return (
@@ -35,7 +28,7 @@ const Tab = createBottomTabNavigator();
 export default function MyTabs() {
   return (
     <Tab.Navigator
-      initialRouteName="Map"
+      initialRouteName="Home"
       tabBarOptions={{
         activeTintColor: '#FBAF02',
       }}
@@ -62,7 +55,7 @@ export default function MyTabs() {
       />
     <Tab.Screen
         name="Home"
-        component={Home}
+        component={HomeScreen}
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({ color, size }) => (
