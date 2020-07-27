@@ -8,6 +8,7 @@ import CodeConfirmation from './screens/CodeConfirmation';
 import HomePage from './screens/feeds/HomePage';
 import CreateEvent from './screens/feeds/CreateEvent';
 import MapScreen from './screens/MapScreen';
+import HomeScreen from './screens/feeds/HomeScreen';
 import Tabs from './screens/feeds/HomePage';
 import InputLocation from './screens/feeds/InputLocation'; 
 import SelectCategory from './screens/feeds/SelectCategory'; 
@@ -26,6 +27,7 @@ function App() {
         <Stack.Screen name="Foodmate" component={HomePage} />
         <Stack.Screen name="Create" component={CreateEvent} />
         <Stack.Screen name="Map" component={MapScreen} />
+        <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Choose Restaurant" component={InputLocation}/>
         <Stack.Screen name="Select Category" component={SelectCategory}/>
       </Stack.Navigator>
