@@ -60,7 +60,7 @@ export default class App extends Component {
           ref={(component) => { this.multiSelect = component }}
           onSelectedItemsChange={this.onSelectedItemsChange}
           selectedItems={selectedItems}
-          selectText="  Pick Items"
+          selectText="Pick Items"
           onChangeInput={ (text)=> console.log(text)}
           tagRemoveIconColor="#707070"
           tagBorderColor="#707070"
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#FAF7F0',
-    padding: 20,
+    padding: 20
   },
   multiSelectContainer: {
     height: 550,
