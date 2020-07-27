@@ -211,7 +211,7 @@ export default class App extends React.Component {
         
         <TouchableOpacity
           style={styles.loginBtn}>
-          <Text> Create </Text>
+          <Text> Confirm </Text>
         </TouchableOpacity>
       </SafeAreaView>
     );
