@@ -26,7 +26,7 @@ function App() {
         <Stack.Screen name="Foodmate" component={HomePage} />
         <Stack.Screen name="Create" component={CreateEvent} />
         <Stack.Screen name="Map" component={MapScreen} />
-        <Stack.Screen name="Input Location" component={InputLocation}/>
+        <Stack.Screen name="Choose Restaurant" component={InputLocation}/>
         <Stack.Screen name="Select Category" component={SelectCategory}/>
       </Stack.Navigator>
     </NavigationContainer>
