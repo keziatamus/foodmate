@@ -157,8 +157,8 @@ export default class App extends React.Component {
           date={this.state.date}
           mode="datetime"
           placeholder="Date and time"
-          format="MMMM Do, H:MM"
-          minDate={moment().format('MMMM Do, H:MM')}
+          format="MMMM D, h:mm A"
+          minDate={moment().format('MMMM D, h:mm A')}
           confirmBtnText="Confirm"
           cancelBtnText="Cancel"
           customStyles={{
