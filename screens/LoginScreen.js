@@ -15,6 +15,11 @@ export default class LoginScreen extends React.Component {
     );
   }
 
+  login_pressed() {
+    console.log(this.state.user);
+    this.props.navigation.replace("Foodmate");
+  };
+
   render() {
 
     return (
@@ -47,7 +52,7 @@ export default class LoginScreen extends React.Component {
           <Text>Log In</Text>
         </TouchableOpacity>
         <TouchableOpacity>
-          <Text onPress={() => this.props.navigation.navigate('Sign Up')}
+          <Text onPress={() => this.props.navigation.replace('Sign Up')}
             style={styles.signUpText}>Sign Up
         </Text>
         </TouchableOpacity>
@@ -62,7 +67,7 @@ export default class LoginScreen extends React.Component {
         this.state.email,
         this.state.password,
       );
-      alert("Logged in!");
+      { this.login_pressed() };
     } catch (error) {
       alert(error);
     }
