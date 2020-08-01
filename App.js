@@ -8,31 +8,44 @@ import CodeConfirmation from './screens/CodeConfirmation';
 import HomePage from './screens/feeds/HomePage';
 import CreateEvent from './screens/feeds/CreateEvent';
 import MapScreen from './screens/MapScreen';
-import HomeScreen from './screens/feeds/HomeScreen';
 import Tabs from './screens/feeds/HomePage';
-import InputLocation from './screens/feeds/InputLocation'; 
-import SelectCategory from './screens/feeds/SelectCategory'; 
+import InputLocation from './screens/feeds/InputLocation';
+import SelectCategory from './screens/feeds/SelectCategory';
+import global from './global';
+//import Profile from './screens/Profile/Profile';
 
 const Stack = createStackNavigator();
 
-function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Foodmate">
-        <Stack.Screen name="Tabs" component={Tabs} options={{ headerShown: false }} />
-        <Stack.Screen name="Log In" component={LoginScreen} />
-        <Stack.Screen name="Sign Up" component={SignUpScreen} />
-        <Stack.Screen name="Forgot Password" component={ForgotPassword} />
-        <Stack.Screen name="Code Confirmation" component={CodeConfirmation} />
-        <Stack.Screen name="Foodmate" component={HomePage} />
-        <Stack.Screen name="Create" component={CreateEvent} />
-        <Stack.Screen name="Map" component={MapScreen} />
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Choose Restaurant" component={InputLocation}/>
-        <Stack.Screen name="Select Category" component={SelectCategory}/>
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
+export default class App extends React.Component {
+  state = {
+    logined: false,
+    user: null,
+  };
+  componentDidMount() {
+    global.app = this;
+  }
+  render() {
+    if (global.config['apiKey'] == undefined) {
+      return <ErrorConfig />;
+    }
+    var screen = "Log In";
+    if (this.state.logined) screen = "Foodmate";
 
-export default App;
+    return (
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName={screen}>
+          <Stack.Screen name="Tabs" component={Tabs} options={{ headerShown: false }} />
+          <Stack.Screen name="Log In" component={LoginScreen} />
+          <Stack.Screen name="Sign Up" component={SignUpScreen} />
+          <Stack.Screen name="Forgot Password" component={ForgotPassword} />
+          <Stack.Screen name="Code Confirmation" component={CodeConfirmation} />
+          <Stack.Screen name="Foodmate" component={HomePage} />
+          <Stack.Screen name="Create" component={CreateEvent} />
+          <Stack.Screen name="Map" component={MapScreen} />
+          <Stack.Screen name="Input Location" component={InputLocation} />
+          <Stack.Screen name="Select Category" component={SelectCategory} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  }
+}
