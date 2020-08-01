@@ -1,15 +1,20 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+//npm install @react-native-community/geolocation
 
-const App = () => {
-  return (
+export default class App extends Component {
+
+    render() {
+      return (
     <View style={styles.container}>
       <GooglePlacesAutocomplete
         query={{
           key: 'AIzaSyB9FOMICSBQTS3I8QYabTulbXu8YUqXDVs',
           language: 'en', 
+          components: 'country:tw'
         }}
         onPress={(data, details = null) => console.log(data)}
         onFail={error => console.error(error)}
@@ -31,9 +36,12 @@ const App = () => {
             color: '#f5c867',
           },
         }}
+        currentLocation={true}
+        currentLocationLabel='Restaurants nearby'
       />
     </View>
-  );
+    )
+  }
 };
 
 const styles = StyleSheet.create({
@@ -45,5 +53,3 @@ const styles = StyleSheet.create({
     padding: 20,
   },
 });
-
-export default App;
