@@ -1,5 +1,7 @@
-import React from 'react';
-import { StyleSheet, Text, View, Platform } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import * as Location from 'expo-location';
+import MapView from 'react-native-maps';
+import { StyleSheet, Text, View, Dimensions, Platform } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 
 export default class App extends React.Component {
@@ -28,6 +30,7 @@ export default class App extends React.Component {
     );
   }
 }
+
 
 const styles = StyleSheet.create({
     container: {
