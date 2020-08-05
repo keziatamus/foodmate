@@ -2,7 +2,9 @@ import React from 'react';
 import DatePicker from 'react-native-datepicker'; //npm install react-native-datepicker --save
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, SafeAreaView } from 'react-native';
 import moment from 'moment'; //npm install moment --save
+import InputLocation from './InputLocation';
 import RNPickerSelect, { defaultStyles } from 'react-native-picker-select';  //npm install react-native-picker-select
+import global from '../../global';
 
 const tags = [{
   label: 'American',
@@ -59,40 +61,113 @@ const member = [{
   value: '5'
 }]
 
+
 export default class App extends React.Component {
-    constructor(){
-        super()
+  constructor() {
+    super()
 
-        this.inputRefs = {
-          selectedTag: null,
-          selectedTag0: null,
-          selectedMember: null,
-          selectedMember0: null,
-        };
+    this.inputRefs = {
+      selectedTag: null,
+      selectedTag0: null,
+      selectedMember: null,
+      selectedMember0: null,
+    };
 
-        this.state = {
-            isVisible: false,
-            selectedTag: undefined,
-            selectedMember: undefined,
-        }
-    }
-
-    handlePicker = () => {
-        this.setState({
-            isVisible: false
-        })
-    }
-
-    hidePicker = () => {
-        this.setState({
-            isVisible: false
-        })
-    }
-
-    state = {
-    title: "",
-    desc: "",
+    this.state = {
+      isVisible: false,
+      selectedTag: undefined,
+      selectedMember: undefined,
+      uid: "",
+      title: "",
+      desc: "",
+      date: null,
+      location: "Restaurant",
+      user: "",
+      error: '',
+      loading: false,
+    };
   }
+  locationhandler() {
+    this.props.navigation.navigate('Input Location');
+    if (global.eventloca != null) {
+      this.setState({ location: global.eventloca });
+      global.eventloca = null;
+    }
+  }
+
+  componentWillUnmount() {
+    this.locationhandler()
+  }
+  handlePicker = () => {
+    this.setState({
+      isVisible: false
+    })
+  }
+
+  hidePicker = () => {
+    this.setState({
+      isVisible: false
+    })
+  }
+
+  onConfirmPress() {
+    this.setState({ error: '', loading: true });
+    if (this.state.selectedTag == undefined) {
+      alert('Please select category')
+      this.setState({ loading: false });
+    }
+    else if (this.state.title == "") {
+      alert('Title is required')
+      this.setState({ loading: false });
+    }
+    else if (this.state.desc == "") {
+      alert('Description is required')
+      this.setState({ loading: false });
+    }
+    else if (this.state.date == "") {
+      alert('Please select date and time')
+      this.setState({ loading: false });
+    }
+    else if (this.state.selectedMember == "") {
+      alert('Please select amount of members')
+      this.setState({ loading: false });
+    }
+    else {
+      global.firebase.database().ref('event').push(
+        {
+          createBy: global.user.uid,
+          tags: this.state.selectedTag,
+          title: this.state.title,
+          desc: this.state.desc,
+          date: this.state.date,
+          member: this.state.selectedMember,
+        }
+      )
+        .then(() => {
+          this.setState({ error: '', loading: false });
+          this.confirm_pressed();
+        })
+        .catch(() => {
+          this.setState({ error: '', loading: false });
+          alert("Error")
+        });
+    }
+  }
+
+  renderButtonOrLoading() {
+    if (this.state.loading) {
+      return <Text>Loading</Text>
+    }
+    return <TouchableOpacity
+      style={styles.loginBtn}
+      onPress={this.onConfirmPress.bind(this)}>
+      <Text> Confirm </Text>
+    </TouchableOpacity>
+  }
+
+  confirm_pressed() {
+    alert('Event created!');
+  };
 
   render() {
     const placeholder = {
@@ -142,6 +217,7 @@ export default class App extends React.Component {
             placeholderTextColor="#707070"
             onChangeText={text => this.setState({ title: text })} />
         </View>
+
         <View style={styles.inputView} >
           <TextInput
             style={styles.inputText}
@@ -156,6 +232,7 @@ export default class App extends React.Component {
           style={styles.inputView}
           date={this.state.date}
           mode="datetime"
+          minuteInterval={30}
           placeholder="Date and time"
           format="MMMM D, h:mm A"
           minDate={moment().format('MMMM D, h:mm A')}
@@ -177,6 +254,7 @@ export default class App extends React.Component {
           }}
           onDateChange={(date) => {
             this.setState({ date: date });
+            console.log(date);
           }}
         />
 
@@ -204,15 +282,13 @@ export default class App extends React.Component {
         <View style={styles.inputView} >
           <Text
             style={styles.locationText}
-            onPress={() => this.props.navigation.navigate('Input Location')}>
-              Restaurant
-            </Text>
+            onPress={() => this.locationhandler()}
+            onChangeText={() => this.locationhandler()}>
+            {this.state.location}
+          </Text>
         </View>
-        
-        <TouchableOpacity
-          style={styles.loginBtn}>
-          <Text> Confirm </Text>
-        </TouchableOpacity>
+
+        {this.renderButtonOrLoading()}
       </SafeAreaView>
     );
   }
@@ -262,7 +338,7 @@ const styles = StyleSheet.create({
   signUpView: {
     paddingBottom: 30,
   },
-  locationText:{
+  locationText: {
     height: 20,
     color: "#707070"
   }
