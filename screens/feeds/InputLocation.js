@@ -16,7 +16,10 @@ export default class App extends Component {
           language: 'en', 
           components: 'country:tw'
         }}
-        onPress={(data, details = null) => console.log(data)}
+        onPress={(data = null) => {
+          // 'details' is provided when fetchDetails = true
+          global.eventloca = data.description;
+        }}
         onFail={error => console.error(error)}
         
         styles={{
