@@ -42,8 +42,7 @@ export default class App extends Component {
             color: "#707070",
         },
           predefinedPlacesDescription: {
-            color: "#707070",
-            fontWeight: '300',
+            color: "#FBAF02",
             fontSize: 14,
           },
         }}
@@ -65,11 +64,13 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   saveText: {
+    alignItems: "center",
+    justifyContent: "center",
     height: 15,
     fontSize: 15,
-    marginLeft: "85%",
-    color: "black",
-    marginBottom: 10,
     fontWeight: "700",
+    color: "#707070",
+    marginLeft: "85%",
+    marginBottom: 10,
   },
 });
