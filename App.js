@@ -11,7 +11,9 @@ import MapScreen from './screens/MapScreen';
 import Tabs from './screens/feeds/HomePage';
 import InputLocation from './screens/feeds/InputLocation';
 import SelectCategory from './screens/feeds/SelectCategory';
+import ViewEvent from './screens/feeds/ViewEvent';
 import global from './global';
+import { View } from 'react-native';
 //import Profile from './screens/Profile/Profile';
 
 const Stack = createStackNavigator();
@@ -28,7 +30,7 @@ export default class App extends React.Component {
     if (global.config['apiKey'] == undefined) {
       return <ErrorConfig />;
     }
-    var screen = "Log In";
+    var screen = "View Event";
     if (this.state.logined) screen = "Foodmate";
 
     return (
@@ -41,6 +43,7 @@ export default class App extends React.Component {
           <Stack.Screen name="Code Confirmation" component={CodeConfirmation} />
           <Stack.Screen name="Foodmate" component={HomePage} />
           <Stack.Screen name="Create" component={CreateEvent} />
+          <Stack.Screen name="View Event" component={ViewEvent} options={{ headerShown: false }}/>
           <Stack.Screen name="Map" component={MapScreen} />
           <Stack.Screen name="Input Location" component={InputLocation} />
           <Stack.Screen name="Select Category" component={SelectCategory} />
