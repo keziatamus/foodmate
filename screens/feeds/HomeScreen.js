@@ -66,6 +66,7 @@ export default function HomeScreen(props) {
           ref={mapRef}
           showsUserLocation={true}
           showsMyLocationButton={true}
+          
         />
       </View>
     </View>
@@ -83,6 +84,7 @@ const styles = StyleSheet.create({
     width: '90%',
     height: 220,
     borderRadius: 25
+    
    
     //width: Dimensions.get('window').width,
     //height: Dimensions.get('window').height,

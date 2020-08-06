@@ -57,7 +57,10 @@ export default function MapScreen(props) {
 
 const styles = StyleSheet.create({
     mapStyle: {
+
         width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height,
+        height: '100%',
+        borderRadius: 25
+        //height: Dimensions.get('window').height,
     },
 })
