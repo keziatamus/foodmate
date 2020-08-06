@@ -7,58 +7,50 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default class App extends Component {
 
-  state = {
-    location: ''
-  }
-
-  handleSave() {
-    this.props.route.params.setLocation(this.state.location);
-    this.props.navigation.goBack();
-  }
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <TouchableOpacity>
-          <Text style={styles.saveText} onPress={this.handleSave} > Save </Text>
-        </TouchableOpacity>
-        <GooglePlacesAutocomplete
-          query={{
-            key: 'AIzaSyB9FOMICSBQTS3I8QYabTulbXu8YUqXDVs',
-            language: 'en',
-            components: 'country:tw'
-          }}
-          onPress={(data = null) => {
-            this.setState({ location: data.description });
-          }}
-          onFail={error => console.error(error)}
-
-          styles={{
-            textInputContainer: {
-              backgroundColor: '#FAF7F0',
-              borderTopWidth: 0,
-              borderBottomWidth: 0,
-            },
-            textInput: {
-              marginLeft: 0,
-              marginRight: 0,
-              height: 40,
-              color: "#707070",
-              fontSize: 14,
-            },
-            description: {
-              color: "#707070",
-            },
-            predefinedPlacesDescription: {
-              color: "#FBAF02",
-              fontSize: 14,
-            },
-          }}
-          currentLocation={true}
-          currentLocationLabel='Restaurants nearby'
-
-        />
-      </View>
+    render() {
+      return (
+    <View style={styles.container}>
+      <TouchableOpacity>
+        <Text style={styles.saveText} onPress={() => this.props.navigation.goBack()} > Save </Text>
+      </TouchableOpacity>
+      <GooglePlacesAutocomplete
+        query={{
+          key: 'AIzaSyB9FOMICSBQTS3I8QYabTulbXu8YUqXDVs',
+          language: 'en', 
+          components: 'country:tw'
+        }}
+        onPress={(data = null) => {
+          // 'details' is provided when fetchDetails = true
+          global.eventloca = data.description;
+        }}
+        onFail={error => console.error(error)}
+        
+        styles={{
+          textInputContainer: {
+            backgroundColor: '#FAF7F0',
+            borderTopWidth: 0,
+            borderBottomWidth: 0,
+          },
+          textInput: {
+            marginLeft: 0,
+            marginRight: 0,
+            height: 40,
+            color: "#707070",
+            fontSize: 14,
+          },
+          description: {
+            color: "#707070",
+        },
+          predefinedPlacesDescription: {
+            color: "#FBAF02",
+            fontSize: 14,
+          },
+        }}
+        currentLocation={true}
+        currentLocationLabel='Restaurants nearby'
+        
+      />
+    </View>
     )
   }
 };
