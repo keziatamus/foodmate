@@ -1,3 +1,4 @@
+  
 import React from 'react';
 import DatePicker from 'react-native-datepicker'; //npm install react-native-datepicker --save
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, SafeAreaView } from 'react-native';
@@ -91,8 +92,13 @@ export default class App extends React.Component {
   selectLocation(value) {
     this.setState({ location: value });
   }
+
   locationhandler() {
-    this.props.navigation.navigate('Input Location', { setLocation });
+    this.props.navigation.navigate('Input Location');
+    if (global.eventloca != null) {
+      this.setState({ location: global.eventloca });
+      global.eventloca = null;
+    }
   }
 
   handlePicker = () => {
@@ -280,6 +286,7 @@ export default class App extends React.Component {
           <Text
             style={styles.locationText}
             onPress={() => this.locationhandler()}
+            onChangeText={() => this.locationhandler()}
           >
             {this.state.location}
           </Text>
