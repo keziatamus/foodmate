@@ -92,7 +92,9 @@ const styles = StyleSheet.create({
   mapViewContainer: {
     width: '100%',
     height: 400,
-    borderRadius: 25
+    borderRadius: 25,
+    alignItems: 'center',
+    overflow: 'hidden'
   }
 })
 
