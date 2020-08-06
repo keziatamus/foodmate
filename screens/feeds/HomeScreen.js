@@ -52,7 +52,11 @@ export default function HomeScreen(props) {
         <SearchBar
           lightTheme={true}
           round={true}
-          platform={Platform.OS}
+          searchIcon={{paddingLeft:5}}
+          inputContainerStyle={{backgroundColor: '#FAF7F0'}}
+          containerStyle={{ backgroundColor: 'white', paddingLeft:20, paddingRight:20}}
+          inputStyle={{fontSize:15}}
+          //platform={Platform.OS}
           placeholder="Search"
           onChangeText={updateSearch}
           value={search}
@@ -78,23 +82,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-
   },
   mapStyle: {
     width: '90%',
-    height: 220,
-    borderRadius: 25
-    
-   
+    height: 200,
+    borderRadius: 20
     //width: Dimensions.get('window').width,
     //height: Dimensions.get('window').height,
   },
   mapViewContainer: {
     width: '100%',
     height: 400,
-    borderRadius: 25,
+    borderRadius: 20,
+    marginTop: 20,
     alignItems: 'center',
     overflow: 'hidden'
   }
 })
-
