@@ -80,8 +80,12 @@ const styles = StyleSheet.create({
 
   },
   mapStyle: {
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
+    width: '90%',
+    height: 220,
+    borderRadius: 25
+   
+    //width: Dimensions.get('window').width,
+    //height: Dimensions.get('window').height,
   },
   mapViewContainer: {
     width: '100%',
