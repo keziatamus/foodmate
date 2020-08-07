@@ -1,10 +1,11 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack'; //npm install @react-navigation/stack
+import { createStackNavigator } from '@react-navigation/stack'; 
 import LoginScreen from './screens/LoginScreen';
 import SignUpScreen from './screens/SignUpScreen';
 import ForgotPassword from './screens/ForgotPassword';
 import CodeConfirmation from './screens/CodeConfirmation';
+import ResetPassword from './screens/ResetPassword';
 import HomePage from './screens/feeds/HomePage';
 import CreateEvent from './screens/feeds/CreateEvent';
 import MapScreen from './screens/MapScreen';
@@ -30,17 +31,18 @@ export default class App extends React.Component {
     if (global.config['apiKey'] == undefined) {
       return <ErrorConfig />;
     }
-    var screen = "HomeScreen";
+    var screen = "Foodmate";
     if (this.state.logined) screen = "Foodmate";
 
     return (
       <NavigationContainer>
         <Stack.Navigator initialRouteName={screen}>
-          <Stack.Screen name="Tabs" component={Tabs} options={{ headerShown: false }} />
-          <Stack.Screen name="Log In" component={LoginScreen} />
-          <Stack.Screen name="Sign Up" component={SignUpScreen} />
-          <Stack.Screen name="Forgot Password" component={ForgotPassword} />
-          <Stack.Screen name="Code Confirmation" component={CodeConfirmation} />
+          <Stack.Screen name="Tabs" component={Tabs} options={{ headerShown: false }}/>
+          <Stack.Screen name="Log In" component={LoginScreen} options={{ headerShown: false }}/>
+          <Stack.Screen name="Sign Up" component={SignUpScreen} options={{ headerShown: false }}/>
+          <Stack.Screen name="Forgot Password" component={ForgotPassword} options={{ headerShown: false }}/>
+          <Stack.Screen name="Code Confirmation" component={CodeConfirmation} options={{ headerShown: false }}/>
+          <Stack.Screen name="Reset Password" component={ResetPassword} options={{ headerShown: false }}/>
           <Stack.Screen name="Foodmate" component={HomePage} />
           <Stack.Screen name="Create" component={CreateEvent} />
           <Stack.Screen name="View Event" component={ViewEvent} options={{ headerShown: false }}/>
