@@ -13,16 +13,16 @@ const items = [{
   name: 'French'
 }, {
   id: '4',
-  name: 'Spanish'
-}, {
-  id: '5',
   name: 'Mexican'
 }, {
-  id: '6',
+  id: '5',
   name: 'Korean'
 }, {
-  id: '7',
+  id: '6',
   name: 'Japanese'
+}, {
+  id: '7',
+  name: 'Hong Kong'
 }, {
   id: '8',
   name: 'Chinese'
