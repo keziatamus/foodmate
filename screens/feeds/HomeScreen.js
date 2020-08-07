@@ -3,7 +3,7 @@ import * as Location from 'expo-location';
 import MapView from 'react-native-maps';
 import { StyleSheet, Text, View, Dimensions, Platform, ScrollView, Keyboard } from 'react-native';
 import { SearchBar } from 'react-native-elements';
-import TopCategories from './components/TopCategories';
+import TopCategories from './TopCategories';
 
 export default function HomeScreen(props) {
   const [search, setSearch] = useState('');
