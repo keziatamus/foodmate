@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import * as Location from 'expo-location';
 import MapView from 'react-native-maps';
-import { StyleSheet, Text, View, Dimensions, Platform } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, Platform, ScrollView, Keyboard } from 'react-native';
 import { SearchBar } from 'react-native-elements';
+import TopCategories from './components/TopCategories';
 
 export default function HomeScreen(props) {
   const [search, setSearch] = useState('');
@@ -45,24 +46,25 @@ export default function HomeScreen(props) {
   function updateSearch(value) {
     setSearch(value);
   }
-
   return (
     <View style={styles.container}>
+      <ScrollView>
       <View>
         <SearchBar
           lightTheme={true}
-          round={true}
           searchIcon={{paddingLeft:5}}
-          inputContainerStyle={{backgroundColor: '#FAF7F0'}}
-          containerStyle={{ backgroundColor: 'white', paddingLeft:20, paddingRight:20}}
+          inputContainerStyle={{backgroundColor: 'white', height:40}}
+          containerStyle={{ backgroundColor: '#f7f7f7', paddingLeft:20, paddingRight:20}}
           inputStyle={{fontSize:15}}
           //platform={Platform.OS}
           placeholder="Search"
           onChangeText={updateSearch}
           value={search}
+          
         />
       </View>
 
+      <Text style={styles.titleText}>Current Location</Text>
       <View style={styles.mapViewContainer}>
         <MapView
           style={styles.mapStyle}
@@ -70,11 +72,79 @@ export default function HomeScreen(props) {
           ref={mapRef}
           showsUserLocation={true}
           showsMyLocationButton={true}
-          
         />
       </View>
+      <View>
+        <ScrollView
+          scrollEventThrottle={16}>
+            <View styles={{flex:1, paddingTop:20}}>
+              <Text style={styles.titleText}>
+                Top Categories
+              </Text>
+
+              <View style={{height:250}}>
+                <ScrollView
+                  horizontal={true}
+                  showsHorizontalScrollIndicato={false}>
+                  <TopCategories 
+                  imageUri={require('../../assets/american.jpg')}
+                  name="American"
+                  menu="Hamburger, Fries, Clam Chowder, Deep-Dish Pizza, and more."/> 
+                  <TopCategories 
+                  imageUri={require('../../assets/italian.jpg')}
+                  name="Italian"
+                  menu="Spaghetti, Lasagna, Risotto, Pizza, Ossobuco, Gelato, and more."/>
+                   <TopCategories 
+                  imageUri={require('../../assets/french.jpg')}
+                  name="French"
+                  menu="French toast, Ratatouille, Crêpes, Soufflé, Cassoulet, and more."/>
+                  <TopCategories 
+                  imageUri={require('../../assets/mexican.jpg')}
+                  name="Mexican"
+                  menu="Burritos, Guacamole, Enchiladas, Quesadillas, Salsa, and more."/>
+                  <TopCategories 
+                  imageUri={require('../../assets/korean.jpg')}
+                  name="Korean"
+                  menu="Bulgogi, Bibimbap, Ddukbokki, Kimchi, Japchae, and more."/>
+                  <TopCategories 
+                  imageUri={require('../../assets/japanese.jpg')}
+                  name="Japanese"
+                  menu="Sushi, Sashimi, Tempura, Soba, Udon, Onigri, Yakitori, and more."/>
+                  <TopCategories 
+                  imageUri={require('../../assets/chinese.jpg')}
+                  name="Chinese"
+                  menu="Hotpot, Sichuan Pork, Sweet and Sour Pork, Fried Noodle, and more."/>
+                  <TopCategories 
+                  imageUri={require('../../assets/hongkong.jpg')}
+                  name="Hong Kong"
+                  menu="Wontons, Roast Goose, Fish Balls, Har Gow, Chickens' Feet, and more."/>
+                  <TopCategories 
+                  imageUri={require('../../assets/taiwanese.jpg')}
+                  name="Taiwanese"
+                  menu="Beef Noodles, Dumplings, Minced Pork Rice, Stinky Tofu, and more."/>
+                  <TopCategories 
+                  imageUri={require('../../assets/thai.jpg')}
+                  name="Thai"
+                  menu="Tom Yum Goong, Som Tum, Pad Thai, Khao Pad, and more."/>
+                  <TopCategories 
+                  imageUri={require('../../assets/indian.jpg')}
+                  name="Indian"
+                  menu="Biryani, Butter Chicken, Tandoori Chicken, aFlatbread, and more."/>
+                  <TopCategories 
+                  imageUri={require('../../assets/indonesian.jpg')}
+                  name="Indonesian"
+                  menu="Satay, Fried Rice, Beef Rendang, Sop Buntut, Soto Ayam, and more."/>
+                  
+                  </ScrollView>
+              </View>
+              <View>
+              </View>
+            </View>
+          </ScrollView>
+      </View>
+      </ScrollView>
     </View>
-  )
+  ) 
 }
 
 
@@ -83,18 +153,26 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
+  titleText:{
+    fontSize:17,
+    color:"#454545",
+    fontWeight: '600',
+    textAlign:'left',
+    marginTop:20,
+    paddingHorizontal: 20
+  },
   mapStyle: {
     width: '90%',
-    height: 200,
-    borderRadius: 20
+    height: 180,
+    borderRadius: 10
     //width: Dimensions.get('window').width,
     //height: Dimensions.get('window').height,
   },
   mapViewContainer: {
     width: '100%',
-    height: 400,
-    borderRadius: 20,
-    marginTop: 20,
+    height: 190,
+    borderRadius: 10,
+    marginTop: 10,
     alignItems: 'center',
     overflow: 'hidden'
   }
