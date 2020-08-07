@@ -9,40 +9,40 @@ import global from '../../global';
 
 const tags = [{
   label: 'American',
-  value: 'American'
+  value: '1'
 }, {
   label: 'Italian',
-  value: 'Italian'
+  value: '2'
 }, {
   label: 'French',
-  value: 'French'
-}, {
-  label: 'Spanish',
-  value: 'Spanish'
+  value: '3'
 }, {
   label: 'Mexican',
-  value: 'Mexican'
+  value: '4'
 }, {
   label: 'Korean',
-  value: 'Korean'
+  value: '5'
 }, {
-  label: 'Japenese',
-  value: 'Japanese'
+  label: 'Japanese',
+  value: '6'
 }, {
   label: 'Chinese',
-  value: 'Chinese'
+  value: '7'
+}, {
+  label: 'Hong Kong',
+  value: '8'
 }, {
   label: 'Taiwanese',
-  value: 'Taiwanese',
+  value: '9',
 }, {
   label: 'Thai',
-  value: 'Thai',
+  value: '10',
 }, {
   label: 'Indian',
-  value: 'Indian',
+  value: '11',
 }, {
   label: 'Indonesian',
-  value: 'Indonesian'
+  value: '12'
 }]
 
 const member = [{
@@ -286,8 +286,7 @@ export default class App extends React.Component {
           <Text
             style={styles.locationText}
             onPress={() => this.locationhandler()}
-            onChangeText={() => this.locationhandler()}
-          >
+            onChangeText={() => this.locationhandler()}>
             {this.state.location}
           </Text>
         </View>
