@@ -10,9 +10,9 @@ class TopCategories extends Component{
                       style={{flex:1, width:null, height:null, resizeMode:'cover', borderRadius:10, marginVertical:10}}/>
 
                     </View>
-                    <View style={{flex:1, paddingLeft:10}}>
-                      <Text>{this.props.name}</Text>
-                      <Text>{this.props.menu}</Text>
+                    <View style={{flex:1, paddingLeft:0}}>
+                      <Text style={{fontSize:14, fontWeight:'600', marginBottom:3}}>{this.props.name}</Text>
+                      <Text style={{fontsize:14, fontWeight:'300', marginBottom:3}}>{this.props.menu}</Text>
                     </View>
                   </View>
         )
