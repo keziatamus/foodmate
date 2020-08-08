@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import * as Location from 'expo-location';
 import MapView from 'react-native-maps';
-import { StyleSheet, Text, View, Dimensions, Platform, ScrollView, Keyboard } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, Platform, ScrollView } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import TopCategories from './TopCategories';
+import Events from './Events';
 
 export default function HomeScreen(props) {
   const [search, setSearch] = useState('');
@@ -82,7 +83,7 @@ export default function HomeScreen(props) {
                 Top Categories
               </Text>
 
-              <View style={{height:250}}>
+              <View style={{height:210}}>
                 <ScrollView
                   horizontal={true}
                   showsHorizontalScrollIndicato={false}>
@@ -134,10 +135,17 @@ export default function HomeScreen(props) {
                   imageUri={require('../../assets/indonesian.jpg')}
                   name="Indonesian"
                   menu="Satay, Fried Rice, Beef Rendang, Sop Buntut, Soto Ayam, and more."/>
-                  
                   </ScrollView>
               </View>
-              <View>
+              <View styles={{flex:1, paddingTop:20}}>
+              <Text style={styles.titleText}>
+                Events
+              </Text>
+                <Events
+                imageUri={require('../../assets/italian/1.jpg')}
+                title="I LOVE PASTA"
+                date="Friday, August 7"
+                />
               </View>
             </View>
           </ScrollView>
@@ -156,7 +164,7 @@ const styles = StyleSheet.create({
   titleText:{
     fontSize:17,
     color:"#454545",
-    fontWeight: '600',
+    fontWeight: '700',
     textAlign:'left',
     marginTop:20,
     paddingHorizontal: 20
