@@ -90,50 +90,62 @@ export default function HomeScreen(props) {
                   <TopCategories 
                   imageUri={require('../../assets/american.jpg')}
                   name="American"
+                  total="(14)"
                   menu="Hamburger, Fries, Clam Chowder, Deep-Dish Pizza, and more."/> 
                   <TopCategories 
                   imageUri={require('../../assets/italian.jpg')}
                   name="Italian"
+                  total="(20)"
                   menu="Spaghetti, Lasagna, Risotto, Pizza, Ossobuco, Gelato, and more."/>
                    <TopCategories 
                   imageUri={require('../../assets/french.jpg')}
                   name="French"
+                  total="(4)"
                   menu="French toast, Ratatouille, Crêpes, Soufflé, Cassoulet, and more."/>
                   <TopCategories 
                   imageUri={require('../../assets/mexican.jpg')}
                   name="Mexican"
+                  total="(1)"
                   menu="Burritos, Guacamole, Enchiladas, Quesadillas, Salsa, and more."/>
                   <TopCategories 
                   imageUri={require('../../assets/korean.jpg')}
                   name="Korean"
+                  total="(7)"
                   menu="Bulgogi, Bibimbap, Ddukbokki, Kimchi, Japchae, and more."/>
                   <TopCategories 
                   imageUri={require('../../assets/japanese.jpg')}
+                  total="(9)"
                   name="Japanese"
                   menu="Sushi, Sashimi, Tempura, Soba, Udon, Onigri, Yakitori, and more."/>
                   <TopCategories 
                   imageUri={require('../../assets/chinese.jpg')}
                   name="Chinese"
+                  total="(2)"
                   menu="Hotpot, Sichuan Pork, Sweet and Sour Pork, Fried Noodle, and more."/>
                   <TopCategories 
                   imageUri={require('../../assets/hongkong.jpg')}
                   name="Hong Kong"
+                  total="(1)"
                   menu="Wontons, Roast Goose, Fish Balls, Har Gow, Chickens' Feet, and more."/>
                   <TopCategories 
                   imageUri={require('../../assets/taiwanese.jpg')}
                   name="Taiwanese"
+                  total="(3)"
                   menu="Beef Noodles, Dumplings, Minced Pork Rice, Stinky Tofu, and more."/>
                   <TopCategories 
                   imageUri={require('../../assets/thai.jpg')}
                   name="Thai"
+                  total="(6)"
                   menu="Tom Yum Goong, Som Tum, Pad Thai, Khao Pad, and more."/>
                   <TopCategories 
                   imageUri={require('../../assets/indian.jpg')}
                   name="Indian"
+                  total="(1)"
                   menu="Biryani, Butter Chicken, Tandoori Chicken, aFlatbread, and more."/>
                   <TopCategories 
                   imageUri={require('../../assets/indonesian.jpg')}
                   name="Indonesian"
+                  total="(1)"
                   menu="Satay, Fried Rice, Beef Rendang, Sop Buntut, Soto Ayam, and more."/>
                   </ScrollView>
               </View>
@@ -144,7 +156,9 @@ export default function HomeScreen(props) {
                 <Events
                 imageUri={require('../../assets/italian/1.jpg')}
                 title="I LOVE PASTA"
+                member="4"
                 date="Friday, August 7"
+                location="里吉拿義大利麵 Regina Pasta"
                 />
               </View>
             </View>
