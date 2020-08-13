@@ -1,5 +1,6 @@
 import React, { Component} from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 
 class Events extends Component{
     render(){
@@ -10,9 +11,17 @@ class Events extends Component{
                       style={{flex:1, width:null, height:null, resizeMode:'cover', borderRadius:10, marginVertical:10}}/>
 
                     </View>
-                    <View style={{flex:1, paddingLeft:0}}>
-                      <Text style={{fontSize:14, fontWeight:'600', marginBottom:3}}>{this.props.title}</Text>
-                      <Text style={{fontsize:14, fontWeight:'300', marginBottom:3}}>{this.props.date}</Text>
+                    <View style={{flexDirection:'row', justifyContent:'space-between'}}>
+                      <Text style={{fontSize:16, fontWeight:'600'}}>{this.props.title}</Text>
+                      <View style={{flexDirection:'row',justifyContent:'flex-end'}}>
+                        <MaterialCommunityIcons name="account" size={15} color={'black'} />
+                        <Text style={{fontSize:13, fontWeight:'300'}}>{this.props.member}</Text>
+                      </View>
+                      
+                    </View>
+                    <View style={{flex:1, paddingTop:5}}>
+                      <Text style={{fontSize:13, fontWeight:'300'}}>{this.props.date}</Text>
+                      <Text style={{fontSize:14, fontWeight:'300'}}>{this.props.location}</Text>
                     </View>
                   </View>
         )
