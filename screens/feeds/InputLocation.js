@@ -10,9 +10,11 @@ export default class App extends Component {
     render() {
       return (
     <View style={styles.container}>
-      <TouchableOpacity>
-        <Text style={styles.saveText} onPress={() => this.props.navigation.goBack()} > Save </Text>
-      </TouchableOpacity>
+        <Text 
+            style={styles.saveText} 
+            onPress={() => this.props.navigation.navigate('View Event')}>
+          Save 
+        </Text>
       <GooglePlacesAutocomplete
         query={{
           key: 'AIzaSyB9FOMICSBQTS3I8QYabTulbXu8YUqXDVs',
