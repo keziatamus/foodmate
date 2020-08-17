@@ -4,20 +4,20 @@ import { View, Text, StyleSheet, Image } from 'react-native';
 class TopCategories extends Component{
     render(){
         return(
-            <View style={{width:250, height:230, paddingLeft:20}}>
-                    <View style={{flex:2}}>
+            <View style={{width:250, height:230, marginLeft:20}}>
+                    <View style={{flex:2, flexDirection:'row', marginTop:10}}>
                       <Image source={this.props.imageUri}  
-                      style={{flex:1, width:null, height:null, resizeMode:'cover', borderRadius:10, marginVertical:10}}/>
-
+                      style={{flex:1, width:null, height:null, resizeMode:'cover', borderRadius:10, marginRight:10}}/>
                     </View>
-                    <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+
+                    <View style={{marginTop:10}}>
                       <Text style={{fontSize:15, fontWeight:'600'}}>{this.props.name}</Text>
-                      <Text style={{fontSize:13, fontWeight:'400'}}>{this.props.total}</Text>
                     </View>
                     <View style={{flex:1,paddingTop:5}}>
                     <Text style={{fontsize:14, fontWeight:'300'}}>{this.props.menu}</Text>
                     </View>
-                  </View>
+
+            </View>
         )
     }
 }
