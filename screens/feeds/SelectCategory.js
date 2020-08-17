@@ -62,16 +62,19 @@ export default class App extends Component {
           selectedItems={selectedItems}
           selectText="Pick Items"
           onChangeInput={ (text)=> console.log(text)}
-          tagRemoveIconColor="#707070"
-          tagBorderColor="#707070"
+          tagRemoveIconColor="#a6a4a4"
+          tagBorderColor="#a6a4a4"
           tagTextColor="#707070"
           selectedItemTextColor="#CCC"
           selectedItemIconColor="#CCC"
           itemTextColor="#000"
           displayKey="name"
-          searchInputStyle={{ color: 'black' }}
+          searchInputPlaceholderText="Select category"
+          searchInputStyle={{ color: 'black', fontSize: 16, padding:20 }}
           submitButtonColor="#FBAF02"
           submitButtonText="Submit"
+          fontSize='16'
+          itemFontSize='16'
         />
         </View>
       </View>
@@ -84,11 +87,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#FAF7F0',
+    backgroundColor: 'white',
     padding: 20
   },
   multiSelectContainer: {
     height: 550,
     width: '98%',
+    padding: 20,
   }
 })
