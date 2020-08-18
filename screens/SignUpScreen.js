@@ -4,6 +4,7 @@ import RNPickerSelect, { defaultStyles } from 'react-native-picker-select';  //n
 import { StyleSheet, Text, View, Picker, TextInput, TouchableOpacity, ScrollView, SafeAreaView, Button } from 'react-native';
 import moment from 'moment';
 import global from '../global';
+import { Feather } from '@expo/vector-icons';
 
 const gender = [
   {
@@ -122,6 +123,11 @@ export default class SignUpScreen extends React.Component {
     return (
 
       <SafeAreaView style={styles.container}>
+        <TouchableOpacity
+          onPress={() => this.props.navigation.goBack()}
+          style={{position:'absolute', left:20, top:40}}>
+          <Feather name='arrow-left' size={24} color='black'/>
+        </TouchableOpacity>
         <View style={styles.signUpView}>
           <Text style={styles.signUpText}> Sign Up</Text>
         </View>
