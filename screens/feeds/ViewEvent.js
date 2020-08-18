@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+import React, { Component, useState } from 'react';
+import { View, Text, StyleSheet, Image, ImageBackground, 
+ScrollView, TouchableOpacity } from 'react-native';
+import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
 
 const ICON_COLOR = '#FBAF02';
 const ICON_SIZE = 24;
-const FONT_SIZE = 14;
-const TITLE_SIZE = 16;
 
 const date = () => (
     <View style={styles.iconStyle}>
@@ -38,43 +37,49 @@ const member = () => (
 )
 
 const location = () => (
-    <View style={styles.iconStyle}>
-    <MaterialCommunityIcons name="map-marker" size={ICON_SIZE} color={ICON_COLOR} />
-    <View style={styles.alignBox}>
-        <Text style={styles.eventTitle}>Restaurant</Text>
-        <Text style={styles.eventDetail}>Regina Pasta</Text>
-    </View>
+  <View style={styles.iconStyle}>
+  <MaterialCommunityIcons name="map-marker" size={ICON_SIZE} color={ICON_COLOR} />
+  <View style={styles.alignBox}>
+      <Text style={styles.eventTitle}>Restaurant</Text>
+      <Text style={styles.eventDetail}>里吉拿義大利麵 Regina Pasta</Text>
   </View>
+</View>
 )
 
-const description = () => (
-    <View style={styles.iconStyle}>
-    <MaterialCommunityIcons name="note-outline" size={ICON_SIZE} color={ICON_COLOR} />
-    <View style={styles.alignBox}>
-        <Text style={styles.eventTitle}>Description</Text>
-        <Text style={styles.eventDesc}>For my fellow pasta lover in Ming Chuan University. Taiwanese and foreigners are all welcome to join!</Text>
-    </View>
-  </View>
-)
+export default function Event(){
+    return (
+      <View style={{flex:1, backgroundColor:'white'}}>
+        <ImageBackground
+          source={require('../../assets/italian/2.jpg')}
+          style={styles.image}
+          imageStyle={{borderBottomLeftRadius:20, borderBottomRightRadius:20}}>
+            <View style={styles.imageOverlay}>
+            </View>
 
-export default class App extends Component {
-    render() {
-      return (
-    <View style={styles.container}>
-        <Text style={styles.title}> I LOVE PASTA! </Text>
+        <Text style={styles.title}>I LOVE PASTA</Text>
+        <Text style={styles.description}>For my fellow pasta lover in Ming Chuan University. Taiwanese and foreigners are all welcome to join!</Text>
+        
+        <TouchableOpacity style={{position:'absolute', left:20, top:40}}>
+          <Feather name='arrow-left' size={24} color='#fff'/>
+        </TouchableOpacity>
+ 
+        </ImageBackground>
 
+      <View style={{}}>
         <View style={styles.iconContainer}>
             {date()}
             {time()}
             {member()}
             {location()}
-            {description()} 
         </View>
-    
-    </View>
+        <TouchableOpacity style={styles.joinBtn}>
+        <Text style={{fontSize:15, fontWeight:'bold'}}>Join</Text>
+        </TouchableOpacity>
+      </View>
+
+      </View>
     )
-  }
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -83,41 +88,62 @@ const styles = StyleSheet.create({
     backgroundColor: '#FAF7F0',
     padding: 20,
   },
-  alignBox:{
+  iconContainer: {
+    paddingTop:10,
+    paddingBottom:5,
+    flexDirection: 'column',
+    flexWrap: 'wrap',
+  },
+  iconStyle: {
+    flexDirection: 'row',
     justifyContent: 'flex-start',
+    paddingLeft:20,
+    paddingTop: 20,
   },
   eventTitle: {
-    fontSize: TITLE_SIZE,
+    fontSize: 15,
     fontWeight: 'bold',
     paddingLeft: 10,
     marginBottom: 5,
   },
   eventDetail: {
-    fontSize: FONT_SIZE,
+    fontSize: 14,
     paddingLeft: 10,
   },
-  eventDesc: {
-    fontSize: FONT_SIZE,
-    paddingLeft: 10,
-    paddingRight: 20,
+  image: {
+    height:300,
+    justifyContent:'flex-end',
   },
   title: {
-    fontSize: 20,
-    color: "black",
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginTop: 50,
-    marginBottom: 20
+    color:'white',
+    fontSize:24,
+    fontWeight:'bold',
+    paddingHorizontal:20,
+    marginVertical:10,
   },
-  iconStyle: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    padding: 20,
+  description: {
+    color:'white',
+    fontSize:16,
+    fontWeight:'500',
+    paddingHorizontal:20,
+    marginBottom:30
   },
-  iconContainer: {
-    borderRadius: 10,
-    backgroundColor: 'white',
-    flexDirection: 'column',
-    flexWrap: 'wrap',
+  imageOverlay: {
+    width:375,
+    height:320,
+    borderRadius:20,
+    position:'absolute',
+    backgroundColor:'#000',
+    opacity:0.5,
+  },
+  joinBtn: {
+    position:'absolute',
+    right:'10%',
+    top:'110%',
+    width:'80%',
+    backgroundColor:'#FBAF02',
+    borderRadius:20,
+    padding:15,
+    alignItems:'center',
   },
 });
