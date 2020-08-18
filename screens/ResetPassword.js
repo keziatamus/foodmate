@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import global from "../global";
+import { Feather } from '@expo/vector-icons';
 
 export default class App extends React.Component {
   state = {
@@ -46,6 +47,11 @@ export default class App extends React.Component {
   render() {
     return (
       <SafeAreaView style={styles.container}>
+        <TouchableOpacity
+          onPress={() => this.props.navigation.goBack()}
+          style={{position:'absolute', left:20, top:40}}>
+          <Feather name='arrow-left' size={24} color='black'/>
+        </TouchableOpacity>
         <TouchableOpacity>
           <Text style={styles.titleText}>Enter a New Password</Text>
         </TouchableOpacity>
