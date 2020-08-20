@@ -1,6 +1,7 @@
 import React, { Component} from 'react';
 import { View, Text, Image, StyleSheet, Dimensions, ScrollView } from 'react-native';
 import { Icon, Container, Content, Header, Left, Body, Right, Button } from 'native-base'
+import { TouchableOpacity } from 'react-native-gesture-handler';
 //npm install native-base
 
 var {height, width} = Dimensions.get('window')
@@ -37,6 +38,7 @@ class Profile extends Component{
 
                             <View style={{flexDirection:'row'}}>
                                     <Button bordered dark
+                                        onPress={()=> this.props.navigation.navigate('Edit Profile')}
                                         style={{flex:3, marginLeft: 10,
                                         justifyContent:'center', height: 40}}>
                                         <Text>Edit Profile</Text>
