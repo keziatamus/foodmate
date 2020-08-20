@@ -46,7 +46,7 @@ const location = () => (
 </View>
 )
 
-export default function Event(){
+export default function Event(props){
     return (
       <View style={{flex:1, backgroundColor:'white'}}>
         <ImageBackground
@@ -59,7 +59,9 @@ export default function Event(){
         <Text style={styles.title}>I LOVE PASTA</Text>
         <Text style={styles.description}>For my fellow pasta lover in Ming Chuan University. Taiwanese and foreigners are all welcome to join!</Text>
         
-        <TouchableOpacity style={{position:'absolute', left:20, top:40}}>
+        <TouchableOpacity
+          onPress={() => props.navigation.goBack()}
+          style={{position:'absolute', left:20, top:40}}>
           <Feather name='arrow-left' size={24} color='#fff'/>
         </TouchableOpacity>
  
