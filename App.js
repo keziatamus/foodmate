@@ -48,9 +48,9 @@ export default class App extends React.Component {
           <Stack.Screen name="Create" component={CreateEvent} />
           <Stack.Screen name="View Event" component={ViewEvent} options={{ headerShown: false }}/>
           <Stack.Screen name="Map" component={MapScreen} />
-          <Stack.Screen name="Set Location" component={InputLocation}/>
+          <Stack.Screen name="Set Location" component={InputLocation} options={{ headerBackTitle: 'Back'}}/>
           <Stack.Screen name="Select Category" component={SelectCategory} />
-          <Stack.Screen name="Edit Profile" component={EditProfile} />
+          <Stack.Screen name="Edit Profile" component={EditProfile} options={{ headerBackTitle: 'Profile'}}/>
           <Stack.Screen name="Personal Information" component={PersonalInfo} />
         </Stack.Navigator>
       </NavigationContainer>
