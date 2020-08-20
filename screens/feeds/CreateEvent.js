@@ -94,7 +94,7 @@ export default class App extends React.Component {
   }
 
   locationhandler() {
-    this.props.navigation.navigate('Input Location');
+    this.props.navigation.navigate('Set Location');
     if (global.eventloca != null) {
       this.setState({ location: global.eventloca });
       global.eventloca = null;
