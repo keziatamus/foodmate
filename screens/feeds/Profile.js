@@ -1,10 +1,8 @@
 import React, { Component} from 'react';
 import { View, Text, Image, StyleSheet, Dimensions, ScrollView } from 'react-native';
-import { Icon, Container, Content, Header, Left, Body, Right, Button } from 'native-base'
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Icon, Container, Content, Button } from 'native-base'
 //npm install native-base
 
-var {height, width} = Dimensions.get('window')
 class Profile extends Component{
     render(){
         return(
