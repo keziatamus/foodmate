@@ -13,6 +13,7 @@ import Tabs from './screens/feeds/HomePage';
 import InputLocation from './screens/feeds/InputLocation';
 import SelectCategory from './screens/feeds/SelectCategory';
 import ViewEvent from './screens/feeds/ViewEvent';
+import Profile from './screens/feeds/Profile';
 import EditProfile from './screens/feeds/EditProfile';
 import PersonalInfo from './screens/feeds/PersonalInfo';
 import global from './global';
@@ -50,6 +51,7 @@ export default class App extends React.Component {
           <Stack.Screen name="Map" component={MapScreen} />
           <Stack.Screen name="Set Location" component={InputLocation} options={{ headerBackTitle: 'Back'}}/>
           <Stack.Screen name="Select Category" component={SelectCategory} />
+          <Stack.Screen name="Profile" component={Profile} />
           <Stack.Screen name="Edit Profile" component={EditProfile} options={{ headerBackTitle: 'Profile'}}/>
           <Stack.Screen name="Personal Information" component={PersonalInfo} />
         </Stack.Navigator>
