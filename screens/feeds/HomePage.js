@@ -6,14 +6,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import MapScreen from '../MapScreen';
 import HomeScreen from './HomeScreen';
 import CreateScreen from './CreateEvent';
-
-function Profile() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Profile!</Text>
-    </View>
-  );
-}
+import Profile from './Profile';
 
 function Chat() {
   return (
