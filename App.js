@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack'; 
 import LoginScreen from './screens/LoginScreen';
@@ -49,7 +50,15 @@ export default class App extends React.Component {
           <Stack.Screen name="Create" component={CreateEvent} />
           <Stack.Screen name="View Event" component={ViewEvent} options={{ headerShown: false }}/>
           <Stack.Screen name="Map" component={MapScreen} />
-          <Stack.Screen name="Set Location" component={InputLocation} options={{ headerBackTitle: 'Back'}}/>
+          <Stack.Screen name="Set Location" component={InputLocation} 
+            options={({route, navigation}) => ({ 
+              headerBackTitle: 'Back',
+              headerRight:()=> (
+                <Button 
+                onPress={() => navigation.navigate("View Event")}
+                title="Save‎‎‏‏‎ ‎‏‏‎ ‎‏‏‎"/>
+              )
+              })}/>
           <Stack.Screen name="Select Category" component={SelectCategory} />
           <Stack.Screen name="Profile" component={Profile} />
           <Stack.Screen name="Edit Profile" component={EditProfile} options={{ headerBackTitle: 'Profile'}}/>
