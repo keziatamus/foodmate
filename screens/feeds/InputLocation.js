@@ -4,19 +4,17 @@ import { View, Text, StyleSheet } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 //npm install @react-native-community/geolocation
-import { Feather } from '@expo/vector-icons';
 
 export default class App extends Component {
 
     render() {
       return (
     <View style={styles.container}>
-      <View style={{paddingTop:20, paddingBottom:10, justifyContent:'space-between', flexDirection:'row'}}>
-        <TouchableOpacity
-          onPress={() => this.props.navigation.goBack()}>
-          <Feather name='arrow-left' size={24} color='black'/>
-        </TouchableOpacity>  
-        </View>
+        <Text 
+            style={styles.saveText} 
+            onPress={() => this.props.navigation.navigate('View Event')}>
+          Save 
+        </Text>
       <GooglePlacesAutocomplete
         query={{
           key: 'AIzaSyB9FOMICSBQTS3I8QYabTulbXu8YUqXDVs',
@@ -28,7 +26,7 @@ export default class App extends Component {
           global.eventloca = data.description;
         }}
         onFail={error => console.error(error)}
-        placeholder="Find restaurant"
+        
         styles={{
           textInputContainer: {
             backgroundColor: '#FAF7F0',
