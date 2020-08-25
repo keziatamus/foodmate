@@ -61,8 +61,24 @@ export default class App extends React.Component {
               })}/>
           <Stack.Screen name="Select Category" component={SelectCategory} />
           <Stack.Screen name="Profile" component={Profile} />
-          <Stack.Screen name="Edit Profile" component={EditProfile} options={{ headerBackTitle: 'Profile'}}/>
-          <Stack.Screen name="Personal Information" component={PersonalInfo} />
+          <Stack.Screen name="Edit Profile" component={EditProfile} 
+          options={({route, navigation}) => ({ 
+            headerBackTitle: 'Back',
+            headerRight:()=> (
+              <Button 
+              onPress={() => navigation.navigate("Profile")}
+              title="Save‎‎‏‏‎ ‎‏‏‎ ‎‏‏‎"/>
+            )
+            })}/>
+          <Stack.Screen name="Personal Information" component={PersonalInfo} 
+          options={({route, navigation}) => ({ 
+            headerBackTitle: 'Back',
+            headerRight:()=> (
+              <Button 
+              onPress={() => navigation.navigate("View Event")}
+              title="Save‎‎‏‏‎ ‎‏‏‎ ‎‏‏‎"/>
+            )
+            })}/>
         </Stack.Navigator>
       </NavigationContainer>
     );
