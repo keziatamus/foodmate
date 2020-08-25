@@ -164,7 +164,7 @@ export default class App extends React.Component {
     return <TouchableOpacity
       style={styles.loginBtn}
       onPress={this.onConfirmPress.bind(this)}>
-      <Text> Confirm </Text>
+      <Text> Next </Text>
     </TouchableOpacity>
   }
 
