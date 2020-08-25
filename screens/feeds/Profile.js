@@ -1,7 +1,8 @@
 import React, { Component} from 'react';
-import { View, Text, Image, StyleSheet, Dimensions, ScrollView } from 'react-native';
+import { View, Text, Image, StyleSheet, ScrollView } from 'react-native';
 import { Icon, Container, Content, Button } from 'native-base'
 //npm install native-base
+//npm install --save react-native-image-crop-picker
 
 class Profile extends Component{
     render(){
@@ -11,7 +12,7 @@ class Profile extends Component{
                 <View>
                     <View style={{flexDirection:'row', padding:10}}>
                         <View style={{flex:1, padding:10,alignItems:'center'}}>
-                            <Image source={require('../../assets/me.jpg')}
+                            <Image source={require('../../assets/blank.png')}
                             style={{width:90, height:90, borderRadius:45}}/>
                         </View>
                         <View style={{flex:3}}>
@@ -35,27 +36,30 @@ class Profile extends Component{
                             </View>
 
                             <View style={{flexDirection:'row'}}>
-                                    <Button bordered dark
+                                    <Button bordered light
                                         onPress={()=> this.props.navigation.navigate('Edit Profile')}
-                                        style={{flex:3, marginLeft: 10,
-                                        justifyContent:'center', height: 40}}>
+                                        style={{flex:3, marginLeft: 10, justifyContent:'center', height: 40}}>
                                         <Text>Edit Profile</Text>
                                     </Button>
-                                    <Button bordered dark
-                                        style={{flex:1, height:40,
-                                        marginRight:10, marginLeft:5, justifyContent:'center'}}>
+                                    <Button bordered light
+                                        style={{flex:1, height:40, marginRight:10, marginLeft:5, justifyContent:'center'}}>
                                         <Icon name="settings"/>
                                     </Button>
                             </View>
                         </View>
                     </View>
 
-                    <View style={{paddingHorizontal:20, paddingVertical:5}}>
-                        <Text style={{fontSize:16, fontWeight:'bold'}}>Jennie Kim</Text>
-                        <Text>Female, 24</Text>
-                        <Text>A huge fan of milk flavoured ice cream!</Text>
+                    <View style={{paddingHorizontal:20}}>
+                        <Text style={{fontSize:16, fontWeight:'bold'}}>Bob</Text>
+                        <Text style={{fontSize:14, fontWeight:'bold'}}>Male, 20</Text>
+                        <Text style={{fontSize:14, paddingTop:5, paddingBottom:15}}>EAT EAT EAT-ing is my passion</Text>
                     </View>
                      
+                    <View
+                            style={{
+                            borderBottomColor: '#ebe6e6',
+                            borderBottomWidth: 1}}/>
+
                     <View style={styles.event_container}>                        
                         <Text style={{fontSize:16, fontWeight:'bold', color:'black'}}>
                             Current Events
@@ -129,7 +133,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     event_container: {
-        paddingTop:20, 
+        paddingTop:15, 
         paddingLeft:20, 
         paddingRight:20, 
         flexDirection:'row', 
