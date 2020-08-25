@@ -1,18 +1,68 @@
 import React, { Component} from 'react';
-import { View, Text, TextInput, StyleSheet, Image } from 'react-native';
-import { Icon, Container, Content, Header, Left, Body, Right, Button, Title } from 'native-base'
+import { View, Text, TextInput, StyleSheet, Image, ImageBackground } from 'react-native';
+import { Container, Content } from 'native-base'
+import * as ImagePicker from 'expo-image-picker';
+import Constants from 'expo-constants';
+import * as Permissions from 'expo-permissions';
+//npm install yarn -g
+//expo install expo-image-picker
 
-class Edit extends Component{
+export default class Edit extends Component{
+  state = {
+    image: null,
+  };
+
+  componentDidMount() {
+    this.getPermissionAsync();
+  }
+
+  getPermissionAsync = async () => {
+    if (Constants.platform.ios) {
+      const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+      if (status !== 'granted') {
+        alert('Sorry, we need camera roll permissions to make this work!');
+      }
+    }
+  };
+
+  _pickImage = async () => {
+    try {
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      });
+      if (!result.cancelled) {
+        this.setState({ image: result.uri });
+      }
+
+      console.log(result);
+    } catch (E) {
+      console.log(E);
+    }
+  };
+
+  changeImage(){
+
+  };
+  
     render(){
+        let { image } = this.state;
         return(
             <Container style={{flex:1, backgroundColor: 'white'}}>
             <Content>
                 <View>
                         <View style={{flex:1, padding:20,alignItems:'center'}}>
-                            <Image source={require('../../assets/me.jpg')}
-                            style={{width:90, height:90, borderRadius:45}}/>
+                        <ImageBackground 
+                            style={{width:90, height:90, borderRadius:45}}
+                            imageStyle={{borderRadius:45}}
+                            source={require('../../assets/blank.png')}>
+                                {image && <Image source={{ uri: image }} style={{width:90, height:90, borderRadius:45}}/>}
+                        </ImageBackground>
                         </View>
                         <Text 
+                        onPress={this._pickImage}
                         style={{
                             fontSize:14, 
                             fontWeight:'bold',
@@ -20,6 +70,7 @@ class Edit extends Component{
                             alignSelf:'center'}}>
                             Change Profile Photo
                         </Text>
+                        
                         <View
                             style={{
                             marginVertical:20,
@@ -60,7 +111,7 @@ class Edit extends Component{
                         </View>
 
                         <Text 
-                        onPress={()=> this.props.navigation.navigate('Personal Information')}
+                          onPress={()=> this.props.navigation.navigate('Personal Information')}
                         style={{
                             fontSize:16, 
                             color:'#FBAF02', 
@@ -75,7 +126,6 @@ class Edit extends Component{
     }
 }
 
-export default Edit;
 
 const styles = StyleSheet.create({
     container:{
