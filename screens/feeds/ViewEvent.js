@@ -74,9 +74,12 @@ export default function Event(props){
             {member()}
             {location()}
         </View>
+
+        <View style={{alignItems:'center', padding:20}}>
         <TouchableOpacity style={styles.joinBtn}>
         <Text style={{fontSize:15, fontWeight:'bold'}}>Join</Text>
         </TouchableOpacity>
+        </View>
       </View>
 
       </View>
@@ -91,10 +94,12 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   iconContainer: {
+    width:'100%',
     paddingTop:10,
     paddingBottom:5,
     flexDirection: 'column',
     flexWrap: 'wrap',
+    alignItems:'flex-start'
   },
   iconStyle: {
     flexDirection: 'row',
@@ -131,7 +136,7 @@ const styles = StyleSheet.create({
     marginBottom:30
   },
   imageOverlay: {
-    width:375,
+    width:'100%',
     height:320,
     borderRadius:20,
     position:'absolute',
@@ -139,9 +144,6 @@ const styles = StyleSheet.create({
     opacity:0.5,
   },
   joinBtn: {
-    position:'absolute',
-    right:'10%',
-    top:'110%',
     width:'80%',
     backgroundColor:'#FBAF02',
     borderRadius:20,
