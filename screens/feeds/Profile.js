@@ -12,7 +12,7 @@ class Profile extends Component{
                 <View>
                     <View style={{flexDirection:'row', padding:10}}>
                         <View style={{flex:1, padding:10,alignItems:'center'}}>
-                            <Image source={require('../../assets/blank.png')}
+                            <Image source={require('../../assets/me.jpg')}
                             style={{width:90, height:90, borderRadius:45}}/>
                         </View>
                         <View style={{flex:3}}>

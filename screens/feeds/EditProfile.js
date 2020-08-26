@@ -57,7 +57,7 @@ export default class Edit extends Component{
                         <ImageBackground 
                             style={{width:90, height:90, borderRadius:45}}
                             imageStyle={{borderRadius:45}}
-                            source={require('../../assets/blank.png')}>
+                            source={require('../../assets/me.jpg')}>
                                 {image && <Image source={{ uri: image }} style={{width:90, height:90, borderRadius:45}}/>}
                         </ImageBackground>
                         </View>
