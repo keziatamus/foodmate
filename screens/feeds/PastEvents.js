@@ -10,7 +10,7 @@ export default function HomeScreen(props) {
       <ScrollView>      
                 <TouchableOpacity onPress={()=> props.navigation.navigate('View Event')}>
                 <Events
-                  imageUri={require('../../assets/korean/3.jpg')}
+                  imageUri={require('../../assets/past_event/1.jpg')}
                   title="Korean Barbecue"
                   member="4"
                   date="Friday, July 12"
@@ -20,7 +20,7 @@ export default function HomeScreen(props) {
 
                 <TouchableOpacity onPress={()=> props.navigation.navigate('View Event')}>
                 <Events
-                  imageUri={require('../../assets/italian/3.jpg')}
+                  imageUri={require('../../assets/past_event/2.jpg')}
                   title="Friends to share Pizza with"
                   member="2"
                   date="Friday, July 29"
