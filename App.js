@@ -16,6 +16,8 @@ import SelectCategory from './screens/feeds/SelectCategory';
 import ViewEvent from './screens/feeds/ViewEvent';
 import JoinEvent from './screens/feeds/JoinEvent';
 import Profile from './screens/feeds/Profile';
+import PastEvents from './screens/feeds/PastEvents';
+import CurrentEvents from './screens/feeds/CurrentEvents';
 import EditProfile from './screens/feeds/EditProfile';
 import PersonalInfo from './screens/feeds/PersonalInfo';
 import global from './global';
@@ -35,7 +37,7 @@ export default class App extends React.Component {
     if (global.config['apiKey'] == undefined) {
       return <ErrorConfig />;
     }
-    var screen = "Foodmate";
+    var screen = "";
     if (this.state.logined) screen = "Foodmate";
 
     return (
@@ -63,6 +65,10 @@ export default class App extends React.Component {
               })}/>
           <Stack.Screen name="Select Category" component={SelectCategory} />
           <Stack.Screen name="Profile" component={Profile} />
+          <Stack.Screen name="Current Events" component={CurrentEvents} 
+          options={() => ({ headerBackTitle: 'Back' })}/>
+          <Stack.Screen name="Past Events" component={PastEvents} 
+          options={() => ({ headerBackTitle: 'Back' })}/>
           <Stack.Screen name="Edit Profile" component={EditProfile} 
           options={({route, navigation}) => ({ 
             headerBackTitle: 'Back',
