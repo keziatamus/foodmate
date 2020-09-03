@@ -64,7 +64,8 @@ class Profile extends Component{
                         <Text style={{fontSize:16, fontWeight:'bold', color:'black'}}>
                             Current Events
                         </Text>
-                        <Text style={{fontSize:12, fontWeight:'bold', color:'#b0b0b0'}}>
+                        <Text style={{fontSize:12, fontWeight:'bold', color:'#b0b0b0'}}
+                        onPress={()=> this.props.navigation.navigate('Current Events')}>
                             View All
                         </Text>
                     </View>
@@ -93,7 +94,8 @@ class Profile extends Component{
                         <Text style={{fontSize:16, fontWeight:'bold', color:'black'}}>
                             Past Events
                         </Text>
-                        <Text style={{fontSize:12, fontWeight:'bold', color:'#b0b0b0'}}>
+                        <Text style={{fontSize:12, fontWeight:'bold', color:'#b0b0b0'}}
+                        onPress={()=> this.props.navigation.navigate('Past Events')}>
                             View All
                         </Text>
                     </View>
