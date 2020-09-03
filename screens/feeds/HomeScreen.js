@@ -143,7 +143,7 @@ export default function HomeScreen(props) {
               <Text style={styles.titleText}>
                 Events
               </Text>
-              <TouchableOpacity onPress={()=> props.navigation.navigate('View Event')}>
+              <TouchableOpacity onPress={()=> props.navigation.navigate('Join Event')}>
                 <Events
                   imageUri={require('../../assets/italian/2.jpg')}
                   title="I LOVE PASTA"
