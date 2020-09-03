@@ -1,4 +1,3 @@
-  
 import React from 'react';
 import DatePicker from 'react-native-datepicker'; //npm install react-native-datepicker --save
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, SafeAreaView } from 'react-native';
@@ -17,20 +16,20 @@ const tags = [{
   label: 'French',
   value: 'French'
 }, {
+  label: 'Spanish',
+  value: 'Spanish'
+}, {
   label: 'Mexican',
   value: 'Mexican'
 }, {
   label: 'Korean',
   value: 'Korean'
 }, {
-  label: 'Japanese',
+  label: 'Japenese',
   value: 'Japanese'
 }, {
   label: 'Chinese',
   value: 'Chinese'
-}, {
-  label: 'Hong Kong',
-  value: 'Hong Kong'
 }, {
   label: 'Taiwanese',
   value: 'Taiwanese',
@@ -86,15 +85,15 @@ export default class App extends React.Component {
       eventKey: '',
       desc: "",
       date: "",
-      time: "",
       selecteddate: "",
       selectedtime: "",
       location: "Restaurant",
       user: "",
       error: '',
       loading: false,
+
+    };
   }
-}
 
   handlePicker = () => {
     this.setState({
@@ -134,8 +133,9 @@ export default class App extends React.Component {
     else {
       const ref = global.firebase.database().ref('event').push();
       const key = ref.key;
+      global.event = key;
       ref.set({
-    //createBy: global.user.uid,
+        //createBy: global.user.uid,
         eventID: key,
         tags: this.state.selectedTag,
         title: this.state.title,
@@ -143,15 +143,16 @@ export default class App extends React.Component {
         date: this.state.selecteddate,
         time: this.state.selectedtime,
         member: this.state.selectedMember,
-    })
-    .then(() => {
-      this.setState({ error: '', loading: false });
-      this.confirm_pressed();
-    })
-    .catch(() => {
-      this.setState({ error: '', loading: false });
-      alert("Error")
-    });
+        location: "",
+      })
+        .then(() => {
+          this.setState({ error: '', loading: false });
+          this.confirm_pressed();
+        })
+        .catch(() => {
+          this.setState({ error: '', loading: false });
+          alert("Error")
+        });
     }
   }
 
@@ -167,24 +168,22 @@ export default class App extends React.Component {
   }
 
   confirm_pressed() {
-    this.props.navigation.navigate('Set Location', {
-    key: { key }
-    });
+    this.props.navigation.navigate('Set Location');
   };
-  
+
   render() {
     const placeholder = {
-    label: 'Category',
-    value: null,
-    color: '#9EA0A4'
-  }
-  
-  const placeholder_2 = {
-    label: 'Members',
-    value: null,
-    color: '#9EA0A4'
-  }
-  
+      label: 'Category',
+      value: null,
+      color: '#9EA0A4'
+    }
+
+    const placeholder_2 = {
+      label: 'Members',
+      value: null,
+      color: '#9EA0A4'
+    }
+
     return (
 
       <SafeAreaView style={styles.container}>
@@ -259,7 +258,7 @@ export default class App extends React.Component {
             this.setState({ date: date });
             this.setState({ selecteddate: getDate(date) });
             this.setState({ selectedtime: getTime(date) });
-            }}
+          }}
         />
 
         <RNPickerSelect
@@ -282,7 +281,6 @@ export default class App extends React.Component {
             this.inputRefs.selectedMember = el;
           }}
         />
-
         {this.renderButtonOrLoading()}
       </SafeAreaView>
     );
