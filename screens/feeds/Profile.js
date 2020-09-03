@@ -82,9 +82,6 @@ class Profile extends Component{
                                 <Image 
                                     source={require('../../assets/current_event/2.jpg')}  
                                     style={{flex:1, width:null, height:null, resizeMode:'cover', borderRadius:10, marginRight:10}}/>
-                                <Image 
-                                    source={require('../../assets/current_event/3.jpg')}  
-                                    style={{flex:1, width:null, height:null, resizeMode:'cover', borderRadius:10, marginRight:10}}/>
                             </View>
                             </View>
                         </ScrollView>
@@ -111,10 +108,7 @@ class Profile extends Component{
                                     style={{flex:1, width:null, height:null, resizeMode:'cover', borderRadius:10, marginRight:10}}/>
                                 <Image 
                                     source={require('../../assets/past_event/2.jpg')}  
-                                    style={{flex:1, width:null, height:null, resizeMode:'cover', borderRadius:10, marginRight:10}}/>
-                                <Image 
-                                    source={require('../../assets/past_event/3.jpg')}  
-                                    style={{flex:1, width:null, height:null, resizeMode:'cover', borderRadius:10, marginRight:10}}/>
+                                    style={{flex:1, width:null, height:null, resizeMode:'cover', borderRadius:10, marginRight:10}}/> 
                             </View>
                             </View>
                         </ScrollView>
