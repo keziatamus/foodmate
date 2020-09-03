@@ -2,52 +2,57 @@ import React, { Component } from 'react';
 import Constants from 'expo-constants';
 import { View, Text, StyleSheet } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import global from '../../global';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 //npm install @react-native-community/geolocation
 
 export default class App extends Component {
 
-    render() {
-      return (
-    <View style={styles.container}>
-      <GooglePlacesAutocomplete
-        query={{
-          key: 'AIzaSyB9FOMICSBQTS3I8QYabTulbXu8YUqXDVs',
-          language: 'en', 
-          components: 'country:tw'
-        }}
-        onPress={(data = null) => {
-          // 'details' is provided when fetchDetails = true
-          global.eventloca = data.description;
-        }}
-        onFail={error => console.error(error)}
-        
-        styles={{
-          textInputContainer: {
-            backgroundColor: '#FAF7F0',
-            borderTopWidth: 0,
-            borderBottomWidth: 0,
-          },
-          textInput: {
-            marginLeft: 0,
-            marginRight: 0,
-            height: 40,
-            color: "#707070",
-            fontSize: 14,
-          },
-          description: {
-            color: "#707070",
-        },
-          predefinedPlacesDescription: {
-            color: "#FBAF02",
-            fontSize: 14,
-          },
-        }}
-        currentLocation={true}
-        currentLocationLabel='Restaurants nearby'
-        
-      />
-    </View>
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <GooglePlacesAutocomplete
+          query={{
+            key: 'AIzaSyB9FOMICSBQTS3I8QYabTulbXu8YUqXDVs',
+            language: 'en',
+            components: 'country:tw'
+          }}
+          onPress={(data = null) => {
+            global.firebase.database().ref('event/' + global.event).update(
+              {
+                location: data.place_id,
+              }
+            )
+          }}
+          onFail={error => console.error(error)}
+
+          styles={{
+            textInputContainer: {
+              backgroundColor: '#FAF7F0',
+              borderTopWidth: 0,
+              borderBottomWidth: 0,
+            },
+            textInput: {
+              marginLeft: 0,
+              marginRight: 0,
+              height: 40,
+              color: "#707070",
+              fontSize: 14,
+            },
+            description: {
+              color: "#707070",
+            },
+            predefinedPlacesDescription: {
+              color: "#FBAF02",
+              fontSize: 14,
+            },
+          }}
+          currentLocation={true}
+          currentLocationLabel='Restaurants nearby'
+
+        />
+      </View>
     )
   }
 };
