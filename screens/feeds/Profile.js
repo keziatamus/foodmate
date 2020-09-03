@@ -50,9 +50,9 @@ class Profile extends Component{
                     </View>
 
                     <View style={{paddingHorizontal:20}}>
-                        <Text style={{fontSize:16, fontWeight:'bold'}}>Bob</Text>
-                        <Text style={{fontSize:14, fontWeight:'bold'}}>Male, 20</Text>
-                        <Text style={{fontSize:14, paddingTop:5, paddingBottom:15}}>EAT EAT EAT-ing is my passion</Text>
+                        <Text style={{fontSize:16, fontWeight:'bold'}}>Jennie</Text>
+                        <Text style={{fontSize:14, fontWeight:'bold'}}>Female, 24</Text>
+                        <Text style={{fontSize:14, paddingTop:5, paddingBottom:15}}>A huge fan of milk flavored ice cream</Text>
                     </View>
                      
                     <View
