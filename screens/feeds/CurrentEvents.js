@@ -10,7 +10,7 @@ export default function HomeScreen(props) {
       <ScrollView>      
               <TouchableOpacity onPress={()=> props.navigation.navigate('View Event')}>
                 <Events
-                  imageUri={require('../../assets/italian/2.jpg')}
+                  imageUri={require('../../assets/current_event/1.jpg')}
                   title="I LOVE PASTA"
                   member="4"
                   date="Friday, August 7"
@@ -20,21 +20,11 @@ export default function HomeScreen(props) {
 
                 <TouchableOpacity onPress={()=> props.navigation.navigate('View Event')}>
                 <Events
-                  imageUri={require('../../assets/korean/2.jpg')}
+                  imageUri={require('../../assets/current_event/2.jpg')}
                   title="Korean Food"
                   member="4"
                   date="Friday, August 9"
                   location="Unni's Korean Kitchen"
-                />
-                </TouchableOpacity>
-
-                <TouchableOpacity onPress={()=> props.navigation.navigate('View Event')}>
-                <Events
-                  imageUri={require('../../assets/american/2.jpg')}
-                  title="Burger and Fries"
-                  member="4"
-                  date="Friday, August 9"
-                  location="Vulgar Space 低俗空間"
                 />
                 </TouchableOpacity>
           </ScrollView>
