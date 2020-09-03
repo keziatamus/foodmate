@@ -75,11 +75,6 @@ export default function Event(props){
             {location()}
         </View>
 
-        <View style={{alignItems:'center', padding:20}}>
-        <TouchableOpacity style={styles.joinBtn}>
-        <Text style={{fontSize:15, fontWeight:'bold'}}>Join</Text>
-        </TouchableOpacity>
-        </View>
       </View>
 
       </View>
@@ -94,9 +89,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   iconContainer: {
-    width:'100%',
-    paddingTop:10,
-    paddingBottom:5,
+    paddingTop:20,
     flexDirection: 'column',
     flexWrap: 'wrap',
     alignItems:'flex-start'
@@ -142,12 +135,5 @@ const styles = StyleSheet.create({
     position:'absolute',
     backgroundColor:'#000',
     opacity:0.5,
-  },
-  joinBtn: {
-    width:'80%',
-    backgroundColor:'#FBAF02',
-    borderRadius:20,
-    padding:15,
-    alignItems:'center',
   },
 });
