@@ -1,17 +1,19 @@
 import React, { Component} from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, FlatList } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import { TouchableOpacity } from 'react-native-gesture-handler';
+
+import { Container, Content, Header, Left, Body, Right, Button } from 'native-base'
 
 class Events extends Component{
     render(){
         return(
-            <View style={{width:'90%', height:300, marginLeft:20}}>
-                    <View style={{flex:2}}>
+            <Container style={{width:'90%', height:300, marginLeft:20}}>
+                    <View style={{flex:3}}>
                       <Image 
                       source={this.props.imageUri}  
-                      style={{flex:1, width:null, height:null, resizeMode:'cover', borderRadius:10, marginVertical:10}}/>
-
+                      style={{flex:1, width:null, height:null, resizeMode:'cover', borderRadius:10, marginVertical:10}}
+                      />
                     </View>
                     <View style={{flexDirection:'row', justifyContent:'space-between'}}>
                       <Text style={{fontSize:16, fontWeight:'600'}}>{this.props.title}</Text>
@@ -25,7 +27,7 @@ class Events extends Component{
                       <Text style={{fontSize:13, fontWeight:'300'}}>{this.props.date}</Text>
                       <Text style={{fontSize:14, fontWeight:'300'}}>{this.props.location}</Text>
                     </View>
-                  </View>
+                  </Container>
         )
     }
 }
