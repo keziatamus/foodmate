@@ -14,6 +14,7 @@ import Tabs from './screens/feeds/HomePage';
 import InputLocation from './screens/feeds/InputLocation';
 import SelectCategory from './screens/feeds/SelectCategory';
 import ViewEvent from './screens/feeds/ViewEvent';
+import JoinEvent from './screens/feeds/JoinEvent';
 import Profile from './screens/feeds/Profile';
 import EditProfile from './screens/feeds/EditProfile';
 import PersonalInfo from './screens/feeds/PersonalInfo';
@@ -49,6 +50,7 @@ export default class App extends React.Component {
           <Stack.Screen name="Foodmate" component={HomePage} />
           <Stack.Screen name="Create" component={CreateEvent} />
           <Stack.Screen name="View Event" component={ViewEvent} options={{ headerShown: false }}/>
+          <Stack.Screen name="Join Event" component={JoinEvent} options={{ headerShown: false }}/>
           <Stack.Screen name="Map" component={MapScreen} />
           <Stack.Screen name="Set Location" component={InputLocation} 
             options={({route, navigation}) => ({ 
