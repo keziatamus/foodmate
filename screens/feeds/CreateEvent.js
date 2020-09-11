@@ -62,7 +62,7 @@ const member = [{
 }]
 
 const getDate = s => s.split(',')[0]
-const getTime = s => s.includes(',') && s.substr(s.lastIndexOf(',') + 2).split(' ')[0]
+const getTime = s => s.includes(',') && s.substr(s.lastIndexOf(',') + 2)
 //const postKey = global.firebase.database().ref().child('posts').push().key
 
 export default class App extends React.Component {
@@ -106,8 +106,6 @@ export default class App extends React.Component {
       isVisible: false
     })
   }
-  // getTime = (s) => { s.includes(',') && s.substr(s.lastIndexOf(',') + 1).split(' ')[0] }
-
   onConfirmPress() {
     this.setState({ error: '', loading: true });
     if (this.state.selectedTag == undefined) {
@@ -155,6 +153,7 @@ export default class App extends React.Component {
         });
     }
   }
+
 
   renderButtonOrLoading() {
     if (this.state.loading) {
