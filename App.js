@@ -37,7 +37,7 @@ export default class App extends React.Component {
     if (global.config['apiKey'] == undefined) {
       return <ErrorConfig />;
     }
-    var screen = "";
+    var screen = "Foodmate";
     if (this.state.logined) screen = "Foodmate";
 
     return (
