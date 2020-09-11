@@ -49,10 +49,10 @@ export default class LoginScreen extends React.Component {
         <TouchableOpacity
           style={styles.loginBtn}
           onPress={() => this.login()}>
-          <Text>Log In</Text>
+          <Text style={{fontSize:14}}>Log In</Text>
         </TouchableOpacity>
         <TouchableOpacity>
-          <Text onPress={() => this.props.navigation.replace('Sign Up')}
+          <Text onPress={() => this.props.navigation.navigate('Sign Up')}
             style={styles.signUpText}>Sign Up
         </Text>
         </TouchableOpacity>
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   },
   forgot: {
     color: "#FBAF02",
-    fontSize: 10,
+    fontSize: 12,
     marginLeft: 200
   },
   loginBtn: {
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   signUpText: {
-    fontSize: 13,
+    fontSize: 14,
     color: "#FBAF02"
   }
 });
