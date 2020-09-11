@@ -5,6 +5,7 @@ import { StyleSheet, Text, View, Picker, TextInput, TouchableOpacity, ScrollView
 import moment from 'moment';
 import global from '../global';
 import { Feather } from '@expo/vector-icons';
+import { NavigationHelpersContext } from '@react-navigation/native';
 
 const gender = [
   {
@@ -78,11 +79,11 @@ export default class SignUpScreen extends React.Component {
       this.setState({ loading: false });
     }
     else if (this.state.date == '') {
-      alert('Please input Date of birth')
+      alert('Please input date of birth')
       this.setState({ loading: false });
     }
     else if (this.state.selectedGender == undefined) {
-      alert('Please input Gender')
+      alert('Please input gender')
       this.setState({ loading: false });
     }
     else {
@@ -92,11 +93,11 @@ export default class SignUpScreen extends React.Component {
           this.setState({ error: '', loading: false });
           this.storeInFirebase();
           alert("Signed up");
-
+          props.navigation.navigate('Log In');
         })
         .catch(() => {
           this.setState({ error: '', loading: false });
-          alert("The user with this email is already existed.")
+          alert("The user with this email or username is already existed.")
         });
 
     }
