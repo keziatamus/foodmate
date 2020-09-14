@@ -21,7 +21,8 @@ export default class App extends Component {
           onPress={(data = null) => {
             global.firebase.database().ref('event/' + global.event).update(
               {
-                location: data.place_id,
+                place_id: data.place_id,
+                place_name: data.name,
               }
             )
           }}
