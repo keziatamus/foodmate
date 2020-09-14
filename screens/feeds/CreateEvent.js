@@ -292,6 +292,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
+    
   },
   inputView: {
     width: "80%",
@@ -354,10 +355,11 @@ const pickerSelectStyles = StyleSheet.create({
     paddingRight: 30, // to ensure the text is never behind the icon
   },
   inputAndroid: {
+    borderRadius: 20,
     alignSelf: 'center',
     width: '80%',
     backgroundColor: "#FAF7F0",
-    borderRadius: 20,
+    
     padding: 20,
     fontSize: 15,
     paddingVertical: 12,
