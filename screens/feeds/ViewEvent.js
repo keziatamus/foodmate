@@ -36,6 +36,11 @@ const member = (item) => (
       <Text style={styles.eventTitle}>Member</Text>
       <Text style={styles.eventDetail}>{item} members</Text>
     </View>
+    <TouchableOpacity
+          onPress={() => props.navigation.navigate("Log In")}
+          style={{position:'absolute', left:'92%', top:'50%'}}>
+          <MaterialIcons name="navigate-next" size={30} color='black'/>
+        </TouchableOpacity>
   </View>
 )
 
