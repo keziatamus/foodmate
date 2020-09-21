@@ -2,6 +2,7 @@ import React, { Component, useState } from 'react';
 import { View, Text, StyleSheet, Image, ImageBackground, 
 ScrollView, TouchableOpacity } from 'react-native';
 import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons'; 
 
 const ICON_COLOR = '#FBAF02';
 const ICON_SIZE = 24;
@@ -72,6 +73,11 @@ export default function Event(props){
             {date()}
             {time()}
             {member()}
+            <TouchableOpacity
+              onPress={() => props.navigation.navigate("Members")}
+              style={{position:'absolute', left:'90%', top:'65%'}}>
+              <MaterialIcons name="navigate-next" size={30} color='black'/>
+            </TouchableOpacity>
             {location()}
         </View>
 
