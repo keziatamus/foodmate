@@ -36,11 +36,6 @@ const member = (item) => (
       <Text style={styles.eventTitle}>Member</Text>
       <Text style={styles.eventDetail}>{item} members</Text>
     </View>
-    <TouchableOpacity
-          onPress={() => props.navigation.navigate("Log In")}
-          style={{position:'absolute', left:'92%', top:'50%'}}>
-          <MaterialIcons name="navigate-next" size={30} color='black'/>
-        </TouchableOpacity>
   </View>
 )
 
@@ -117,6 +112,11 @@ export default class App extends Component {
             {date(this.state.date)}
             {time(this.state.time)}
             {member(this.state.member)}
+            <TouchableOpacity
+              onPress={() => props.navigation.navigate("Members")}
+              style={{position:'absolute', left:'90%', top:'65%'}}>
+              <MaterialIcons name="navigate-next" size={30} color='black'/>
+            </TouchableOpacity>
             {location(this.state.place_name)}
           </View>
         </View>
