@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'react-native';
+import { Button, Alert } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack'; 
 import LoginScreen from './screens/LoginScreen';
@@ -22,7 +22,7 @@ import CurrentEvents from './screens/feeds/CurrentEvents';
 import EditProfile from './screens/feeds/EditProfile';
 import PersonalInfo from './screens/feeds/PersonalInfo';
 import global from './global';
-//import Profile from './screens/Profile/Profile';
+import { Feather } from '@expo/vector-icons'; 
 
 const Stack = createStackNavigator();
 
@@ -44,17 +44,49 @@ export default class App extends React.Component {
     return (
       <NavigationContainer>
         <Stack.Navigator initialRouteName={screen}>
-          <Stack.Screen name="Tabs" component={Tabs} options={{ headerShown: false }}/>
-          <Stack.Screen name="Log In" component={LoginScreen} options={{ headerShown: false }}/>
-          <Stack.Screen name="Sign Up" component={SignUpScreen} options={{ headerShown: false }}/>
-          <Stack.Screen name="Forgot Password" component={ForgotPassword} options={{ headerShown: false }}/>
-          <Stack.Screen name="Code Confirmation" component={CodeConfirmation} options={{ headerShown: false }}/>
-          <Stack.Screen name="Reset Password" component={ResetPassword} options={{ headerShown: false }}/>
-          <Stack.Screen name="Foodmate" component={HomePage} />
+          <Stack.Screen name="Tabs" component={Tabs} 
+            options={{ headerShown: false }}/>
+          <Stack.Screen name="Log In" component={LoginScreen} 
+            options={{ headerShown: false }}/>
+          <Stack.Screen name="Sign Up" component={SignUpScreen} 
+            options={{ headerShown: false }}/>
+          <Stack.Screen name="Forgot Password" component={ForgotPassword} 
+            options={{ headerShown: false }}/>
+          <Stack.Screen name="Code Confirmation" component={CodeConfirmation} 
+            options={{ headerShown: false }}/>
+          <Stack.Screen name="Reset Password" component={ResetPassword} 
+            options={{ headerShown: false }}/>
+          <Stack.Screen name="Foodmate" component={HomePage}
+            options={() => ({ 
+              headerRightContainerStyle: {
+                marginRight: 10
+              },
+              headerTitle: 'Foodmate',
+              headerRight:()=> (
+                <Feather name="log-out" size={20} color="black" 
+                onPress={() => 
+                  Alert.alert(
+                    "Logout",
+                    "Are you sure to log out?",
+                    [
+                      {
+                        text: "Yes",
+                        onPress: () => logout(),
+                      },
+                      {
+                        text: "No",
+                      },
+                    ],
+                    { cancelable: false }
+                  )}/>
+              )
+              })}/>
           <Stack.Screen name="Create" component={CreateEvent} />
-          <Stack.Screen name="View Event" component={ViewEvent} options={{ headerShown: false }}/>
-          <Stack.Screen name="Join Event" component={JoinEvent} options={{ headerShown: false }}/>
-          <Stack.Screen name="Map" component={MapScreen} />
+          <Stack.Screen name="View Event" component={ViewEvent} 
+            options={{ headerShown: false }}/>
+          <Stack.Screen name="Join Event" component={JoinEvent} 
+            options={{ headerShown: false }}/>
+          <Stack.Screen name="Map" component={MapScreen}/>
           <Stack.Screen name="Set Location" component={InputLocation} 
             options={({route, navigation}) => ({ 
               headerBackTitle: 'Back',
@@ -68,13 +100,13 @@ export default class App extends React.Component {
             options={() => ({ 
               headerBackTitle: 'Back'})}/>
           <Stack.Screen name="Select Category" component={SelectCategory} />
-          <Stack.Screen name="Profile" component={Profile} />
+          <Stack.Screen name="Profile" component={Profile}/>
           <Stack.Screen name="Current Events" component={CurrentEvents} 
-          options={() => ({ headerBackTitle: 'Back' })}/>
+            options={() => ({ headerBackTitle: 'Back' })}/>
           <Stack.Screen name="Past Events" component={PastEvents} 
-          options={() => ({ headerBackTitle: 'Back' })}/>
+            options={() => ({ headerBackTitle: 'Back' })}/>
           <Stack.Screen name="Edit Profile" component={EditProfile} 
-          options={({route, navigation}) => ({ 
+            options={({route, navigation}) => ({ 
             headerBackTitle: 'Back',
             headerRight:()=> (
               <Button 
@@ -83,7 +115,7 @@ export default class App extends React.Component {
             )
             })}/>
           <Stack.Screen name="Personal Information" component={PersonalInfo} 
-          options={({route, navigation}) => ({ 
+            options={({route, navigation}) => ({ 
             headerBackTitle: 'Back',
             headerRight:()=> (
               <Button 
