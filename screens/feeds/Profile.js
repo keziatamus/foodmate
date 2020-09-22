@@ -38,12 +38,8 @@ class Profile extends Component{
                             <View style={{flexDirection:'row'}}>
                                     <Button bordered light
                                         onPress={()=> this.props.navigation.navigate('Edit Profile')}
-                                        style={{flex:3, marginLeft: 10, justifyContent:'center', height: 40}}>
+                                        style={{flex:3, marginLeft: 10, marginRight: 10, justifyContent:'center', height: 40}}>
                                         <Text>Edit Profile</Text>
-                                    </Button>
-                                    <Button bordered light
-                                        style={{flex:1, height:40, marginRight:10, marginLeft:5, justifyContent:'center'}}>
-                                        <Icon name="settings"/>
                                     </Button>
                             </View>
                         </View>
