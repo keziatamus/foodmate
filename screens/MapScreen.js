@@ -1,7 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
-import MapView from 'react-native-maps';
+import React, { useState, useEffect, useRef,ScrollView  } from 'react';
+import MapView,{Marker} from 'react-native-maps';
 import { StyleSheet, Dimensions, View } from 'react-native';
 import * as Location from 'expo-location';
+
+
 
 export default function MapScreen(props) {
     const [userPosition, setUserPosition] = useState(null);
@@ -25,6 +27,9 @@ export default function MapScreen(props) {
             }, 100);
         }
     }, [userPosition, mapRef]);
+
+    
+
 
     async function getUserPosition() {
         try {
@@ -51,7 +56,21 @@ export default function MapScreen(props) {
                 showsUserLocation={true}
                 showsMyLocationButton={true}
             />
-        </View>
+            
+    <Marker
+     style={styles.markerStyle}
+     coordinate={{
+        latitude: 24.988298,
+        longitude : 121.343778,
+     }}
+     image={require('../assets/Map/marker.png')}
+     title="里吉拿Regina Pasta"
+     description="open on 11AM-9PM"
+    >
+        
+    </Marker>
+
+     </View>
     )
 }
 
@@ -63,4 +82,9 @@ const styles = StyleSheet.create({
         borderRadius: 25
         //height: Dimensions.get('window').height,
     },
+    markerStyle:{
+        width: 10,
+        height: 10
+    }
+    
 })

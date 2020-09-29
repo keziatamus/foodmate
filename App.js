@@ -38,8 +38,8 @@ export default class App extends React.Component {
     if (global.config['apiKey'] == undefined) {
       return <ErrorConfig />;
     }
-    var screen = "Foodmate";
-    if (this.state.logined) screen = "Foodmate";
+    var screen = "Log In";
+    if (this.state.logined) screen = "Log In";
 
     return (
       <NavigationContainer>
