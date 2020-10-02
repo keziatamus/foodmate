@@ -1,9 +1,7 @@
-import React, { useState, useEffect, useRef,ScrollView  } from 'react';
-import MapView,{Marker} from 'react-native-maps';
+import React, { useState, useEffect, useRef } from 'react';
+import MapView from 'react-native-maps';
 import { StyleSheet, Dimensions, View } from 'react-native';
 import * as Location from 'expo-location';
-
-
 
 export default function MapScreen(props) {
     const [userPosition, setUserPosition] = useState(null);
@@ -21,15 +19,12 @@ export default function MapScreen(props) {
                 mapRef.current.animateToRegion({
                     latitude: userPosition.latitude,
                     longitude: userPosition.longitude,
-                    latitudeDelta: 0.0922,
-                    longitudeDelta: 0.0421,
+                    latitudeDelta: 0.00422,
+                    longitudeDelta: 0.000421,
                 }, 800);
             }, 100);
         }
     }, [userPosition, mapRef]);
-
-    
-
 
     async function getUserPosition() {
         try {
@@ -48,7 +43,6 @@ export default function MapScreen(props) {
     }
 
     return (
-        <View style={styles.container}>
             <MapView
                 style={styles.mapStyle}
                 provider="google"
@@ -56,35 +50,14 @@ export default function MapScreen(props) {
                 showsUserLocation={true}
                 showsMyLocationButton={true}
             />
-            
-    <Marker
-     style={styles.markerStyle}
-     coordinate={{
-        latitude: 24.988298,
-        longitude : 121.343778,
-     }}
-     image={require('../assets/Map/marker.png')}
-     title="里吉拿Regina Pasta"
-     description="open on 11AM-9PM"
-    >
-        
-    </Marker>
-
-     </View>
     )
 }
 
 const styles = StyleSheet.create({
     mapStyle: {
-
         width: Dimensions.get('window').width,
         height: '100%',
-        borderRadius: 25
+        borderRadius: 0,
         //height: Dimensions.get('window').height,
     },
-    markerStyle:{
-        width: 10,
-        height: 10
-    }
-    
 })
