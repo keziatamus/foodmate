@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import * as Location from 'expo-location';
 import MapView from 'react-native-maps';
-import { StyleSheet, Text, View, Dimensions, Platform, ScrollView } from 'react-native';
-import { SearchBar } from 'react-native-elements';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import TopCategories from './TopCategories';
 import Events from './Events';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -20,10 +19,11 @@ export default function HomeScreen(props) {
     if (userPosition && mapRef.current) {
       setTimeout(() => {
         mapRef.current.animateToRegion({
-          latitude: userPosition.latitude,
-          longitude: userPosition.longitude,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
+          latitude: userPosition.latitude + 0.002,
+          longitude: userPosition.longitude - 0.0042,
+          //make the marker to the center on ios
+          latitudeDelta: 0.00422,
+          longitudeDelta: 0.00421 ,
         }, 800);
       }, 100);
     }
@@ -37,7 +37,7 @@ export default function HomeScreen(props) {
       console.log({ position })
       setUserPosition({
         latitude: position.coords.latitude,
-        longitude: position.coords.longitude
+        longitude: position.coords.longitude, 
       });
     }
     catch (e) {
@@ -45,26 +45,9 @@ export default function HomeScreen(props) {
     }
   }
 
-  function updateSearch(value) {
-    setSearch(value);
-  }
   return (
     <View style={styles.container}>
       <ScrollView>
-      <View>
-        <SearchBar
-          lightTheme={true}
-          searchIcon={{paddingLeft:5}}
-          inputContainerStyle={{backgroundColor: 'white', height:40}}
-          containerStyle={{ backgroundColor: '#f7f7f7', paddingLeft:20, paddingRight:20}}
-          inputStyle={{fontSize:15}}
-          //platform={Platform.OS}
-          placeholder="Search"
-          onChangeText={updateSearch}
-          value={search}
-          
-        />
-      </View>
 
       <Text style={styles.titleText}>Current Location</Text>
       <View style={styles.mapViewContainer}>
@@ -73,7 +56,7 @@ export default function HomeScreen(props) {
           provider="google"
           ref={mapRef}
           showsUserLocation={true}
-          showsMyLocationButton={true}
+          showsMyLocationButton={false}
         />
       </View>
       <View>
