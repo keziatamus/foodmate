@@ -106,6 +106,13 @@ export default class App extends React.Component {
       isVisible: false
     })
   }
+
+  pushtouser() {
+    global.firebase.database().ref('user/' + global.userkey + "/currentevent").push(
+      { id: global.event }
+    );
+  }
+
   onConfirmPress() {
     this.setState({ error: '', loading: true });
     if (this.state.selectedTag == undefined) {
@@ -133,7 +140,7 @@ export default class App extends React.Component {
       const key = ref.key;
       global.event = key;
       ref.set({
-        //createBy: global.user.uid,
+        createBy: global.userkey,
         eventID: key,
         tags: this.state.selectedTag,
         title: this.state.title,
@@ -145,6 +152,7 @@ export default class App extends React.Component {
       })
         .then(() => {
           this.setState({ error: '', loading: false });
+          this.pushtouser();
           this.confirm_pressed();
         })
         .catch(() => {
@@ -292,7 +300,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
-    
+
   },
   inputView: {
     width: "80%",
@@ -359,7 +367,7 @@ const pickerSelectStyles = StyleSheet.create({
     alignSelf: 'center',
     width: '80%',
     backgroundColor: "#FAF7F0",
-    
+
     padding: 20,
     fontSize: 15,
     paddingVertical: 12,
