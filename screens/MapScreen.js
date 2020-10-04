@@ -17,8 +17,8 @@ export default function MapScreen(props) {
         if (userPosition && mapRef.current) {
             setTimeout(() => {
                 mapRef.current.animateToRegion({
-                    latitude: userPosition.latitude,
-                    longitude: userPosition.longitude,
+                    latitude: userPosition.latitude + 0.002,
+                    longitude: userPosition.longitude - 0.0015,
                     latitudeDelta: 0.00422,
                     longitudeDelta: 0.000421,
                 }, 800);
