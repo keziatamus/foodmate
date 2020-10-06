@@ -1,11 +1,28 @@
 import React, { useState, useEffect, useRef } from 'react';
-import MapView from 'react-native-maps';
-import { StyleSheet, Dimensions, View } from 'react-native';
+//import MapView from 'react-native-maps';
+//import { StyleSheet, Dimensions, View } from 'react-native';
 import * as Location from 'expo-location';
+
+
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  ScrollView,
+  Animated,
+  Image,
+  TouchableOpacity,
+  Dimensions,
+  Platform,
+} from "react-native";
+import MapView, {PROVIDER_GOOGLE,Marker} from "react-native-maps";
 
 export default function MapScreen(props) {
     const [userPosition, setUserPosition] = useState(null);
     const mapRef = useRef(null);
+
+    
 
     useEffect(() => {
         getUserPosition();
@@ -25,6 +42,10 @@ export default function MapScreen(props) {
             }, 100);
         }
     }, [userPosition, mapRef]);
+
+
+
+
 
     async function getUserPosition() {
         try {
@@ -49,7 +70,23 @@ export default function MapScreen(props) {
                 ref={mapRef}
                 showsUserLocation={true}
                 showsMyLocationButton={true}
+            >
+                <Marker
+                  style={styles.markerStyle}
+                  coordinate={{
+                     latitude: 24.988298,
+                     longitude : 121.343778,
+                  }}
+                  image={require('../assets/Map/map_marker.png')}
+                  title="里吉拿Regina Pasta"
+                  description="open on 11AM-9PM"
             />
+            </MapView>
+
+
+            
+
+
     )
 }
 
