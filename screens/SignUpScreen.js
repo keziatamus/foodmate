@@ -5,20 +5,19 @@ import { StyleSheet, Text, View, Picker, TextInput, TouchableOpacity, ScrollView
 import moment from 'moment';
 import global from '../global';
 import { Feather } from '@expo/vector-icons';
-import { NavigationHelpersContext } from '@react-navigation/native';
 
 const gender = [
   {
     label: 'Male',
-    value: 'male',
+    value: 'Male',
   },
   {
     label: 'Female',
-    value: 'female',
+    value: 'Female',
   },
   {
     label: 'Others',
-    value: 'others',
+    value: 'Others',
   },
 ];
 
@@ -50,13 +49,17 @@ export default class SignUpScreen extends React.Component {
 
 
   storeInFirebase() {
-    global.firebase.database().ref('user').push(
-      {
-        username: this.state.username,
-        email: this.state.email,
-        dob: this.state.date,
-        gender: this.state.selectedGender,
-      }
+    const ref = global.firebase.database().ref('user').push();
+    const key = ref.key;
+    global.event = key;
+    ref.set({
+      userID: key,
+      UID: this.state.UID,
+      username: this.state.username,
+      email: this.state.email,
+      dob: this.state.date,
+      gender: this.state.selectedGender,
+    }
     )
   };
 
@@ -79,25 +82,26 @@ export default class SignUpScreen extends React.Component {
       this.setState({ loading: false });
     }
     else if (this.state.date == '') {
-      alert('Please input date of birth')
+      alert('Please input Date of birth')
       this.setState({ loading: false });
     }
     else if (this.state.selectedGender == undefined) {
-      alert('Please input gender')
+      alert('Please input Gender')
       this.setState({ loading: false });
     }
     else {
       const { email, password } = this.state;
       global.firebase.auth().createUserWithEmailAndPassword(email, password)
-        .then(() => {
+        .then(data => {
+          this.setState({ UID: data.user.uid })
           this.setState({ error: '', loading: false });
           this.storeInFirebase();
-          alert("Signed up");
-          props.navigation.navigate('Log In');
+          alert("Please log in");
+          this.props.navigation.replace("Log In");
         })
         .catch(() => {
           this.setState({ error: '', loading: false });
-          alert("The user with this email or username is already existed.")
+          alert("The user with this email is already existed.")
         });
 
     }
@@ -126,8 +130,8 @@ export default class SignUpScreen extends React.Component {
       <SafeAreaView style={styles.container}>
         <TouchableOpacity
           onPress={() => this.props.navigation.goBack()}
-          style={{position:'absolute', left:20, top:40}}>
-          <Feather name='arrow-left' size={24} color='black'/>
+          style={{ position: 'absolute', left: 20, top: 40 }}>
+          <Feather name='arrow-left' size={24} color='black' />
         </TouchableOpacity>
         <View style={styles.signUpView}>
           <Text style={styles.signUpText}> Sign Up</Text>
