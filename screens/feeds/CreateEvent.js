@@ -2,7 +2,6 @@ import React from 'react';
 import DatePicker from 'react-native-datepicker'; //npm install react-native-datepicker --save
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, SafeAreaView } from 'react-native';
 import moment from 'moment'; //npm install moment --save
-import InputLocation from './InputLocation';
 import RNPickerSelect, { defaultStyles } from 'react-native-picker-select';  //npm install react-native-picker-select
 import global from '../../global';
 
@@ -25,7 +24,7 @@ const tags = [{
   label: 'Korean',
   value: 'Korean'
 }, {
-  label: 'Japenese',
+  label: 'Japanese',
   value: 'Japanese'
 }, {
   label: 'Chinese',
