@@ -19,6 +19,7 @@ if (firebaseConfig.apiKey != undefined && !firebase.inited) {
 }
 
 global.user = null;
+global.userkey = null;
 
 global.app = null;
 global.event = null;
