@@ -105,6 +105,11 @@ export default class App extends Component {
             <Feather name='arrow-left' size={24} color='#fff' />
           </TouchableOpacity>
 
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate("Home")}
+            style={{ position: 'absolute', right: 20, top: 40 }}>
+            <MaterialIcons name='home' size={24} color='#fff' />
+          </TouchableOpacity>
         </ImageBackground>
 
         <View style={{}}>
