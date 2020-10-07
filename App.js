@@ -21,6 +21,7 @@ import PastEvents from './screens/feeds/PastEvents';
 import CurrentEvents from './screens/feeds/CurrentEvents';
 import EditProfile from './screens/feeds/EditProfile';
 import PersonalInfo from './screens/feeds/PersonalInfo';
+import Chat from './screens/feeds/Chat';
 import global from './global';
 import { Feather } from '@expo/vector-icons'; 
 
@@ -38,8 +39,8 @@ export default class App extends React.Component {
     if (global.config['apiKey'] == undefined) {
       return <ErrorConfig />;
     }
-    var screen = "Log In";
-    if (this.state.logined) screen = "Log In";
+    var screen = "Foodmate";
+    if (this.state.logined) screen = "Foodmate";
 
     return (
       <NavigationContainer>
@@ -56,6 +57,8 @@ export default class App extends React.Component {
             options={{ headerShown: false }}/>
           <Stack.Screen name="Reset Password" component={ResetPassword} 
             options={{ headerShown: false }}/>
+          <Stack.Screen name="Home" component={HomePage} 
+            options={{ headerTitle: "Foodmate" }}/>
           <Stack.Screen name="Foodmate" component={HomePage}
             options={() => ({ 
               headerRightContainerStyle: {
@@ -123,6 +126,7 @@ export default class App extends React.Component {
               title="Save‎‎‏‏‎ ‎‏‏‎ ‎‏‏‎"/>
             )
             })}/>
+            <Stack.Screen name="Chat" component={Chat}/>
         </Stack.Navigator>
       </NavigationContainer>
     );
