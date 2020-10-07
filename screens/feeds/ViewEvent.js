@@ -4,7 +4,7 @@ import {
   View, Text, StyleSheet, Image, ImageBackground,
   ScrollView, TouchableOpacity
 } from 'react-native';
-import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
+import { MaterialCommunityIcons, MaterialIcons, Feather } from '@expo/vector-icons';
 
 const ICON_COLOR = '#FBAF02';
 const ICON_SIZE = 24;
@@ -100,7 +100,7 @@ export default class App extends Component {
           <Text style={styles.description}>{this.state.desc}</Text>
 
           <TouchableOpacity
-            onPress={() => this.props.navigation.goBack()}
+            onPress={() => props.navigation.goBack()}
             style={{ position: 'absolute', left: 20, top: 40 }}>
             <Feather name='arrow-left' size={24} color='#fff' />
           </TouchableOpacity>
@@ -112,6 +112,11 @@ export default class App extends Component {
             {date(this.state.date)}
             {time(this.state.time)}
             {member(this.state.member)}
+            <TouchableOpacity
+              onPress={() => { this.props.navigation.navigate("Members")}}
+              style={{position:'absolute', left:'90%', top:'65%'}}>
+              <MaterialIcons name="navigate-next" size={30} color='black'/>
+            </TouchableOpacity>
             {location(this.state.place_name)}
           </View>
         </View>
@@ -128,15 +133,15 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   iconContainer: {
-    paddingTop: 20,
+    paddingTop:20,
     flexDirection: 'column',
     flexWrap: 'wrap',
-    alignItems: 'flex-start'
+    alignItems:'flex-start'
   },
   iconStyle: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    paddingLeft: 20,
+    paddingLeft:20,
     paddingTop: 20,
   },
   eventTitle: {
@@ -150,29 +155,29 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   image: {
-    height: 300,
-    justifyContent: 'flex-end',
+    height:300,
+    justifyContent:'flex-end',
   },
   title: {
-    color: 'white',
-    fontSize: 24,
-    fontWeight: 'bold',
-    paddingHorizontal: 20,
-    marginVertical: 10,
+    color:'white',
+    fontSize:24,
+    fontWeight:'bold',
+    paddingHorizontal:20,
+    marginVertical:10,
   },
   description: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: '500',
-    paddingHorizontal: 20,
-    marginBottom: 30
+    color:'white',
+    fontSize:16,
+    fontWeight:'500',
+    paddingHorizontal:20,
+    marginBottom:30
   },
   imageOverlay: {
-    width: '100%',
-    height: 320,
-    borderRadius: 20,
-    position: 'absolute',
-    backgroundColor: '#000',
-    opacity: 0.5,
+    width:'100%',
+    height:320,
+    borderRadius:20,
+    position:'absolute',
+    backgroundColor:'#000',
+    opacity:0.5,
   },
 });
