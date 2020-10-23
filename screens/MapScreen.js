@@ -80,6 +80,31 @@ export default function MapScreen(props) {
                   image={require('../assets/Map/map_marker.png')}
                   title="里吉拿Regina Pasta"
                   description="open on 11AM-9PM"
+                  ></Marker>
+
+                  <Marker
+                  style={styles.markerStyle}
+                  coordinate={{
+                     latitude:  24.989490,
+                     longitude : 121.344279,
+                  }}
+                  image={require('../assets/Map/map_marker.png')}
+                  title="八哥重慶酸辣粉"
+                  description="open on 11:00–14:00 16:30–21:00"
+                  ></Marker>
+
+                  <Marker
+                  style={styles.markerStyle}
+                  coordinate={{
+                     latitude:  24.989745,
+                     longitude : 121.343508,
+                  }}
+                  image={require('../assets/Map/map_marker.png')}
+                  title="小判 拉麵專門店"
+                  description="open on 	17:00–21:00"
+                
+            
+                  
             />
             </MapView>
 
