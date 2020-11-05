@@ -102,6 +102,40 @@ export default function MapScreen(props) {
                   image={require('../assets/Map/map_marker.png')}
                   title="小判 拉麵專門店"
                   description="open on 	17:00–21:00"
+                  ></Marker>
+
+                  <Marker
+                  style={styles.markerStyle}
+                  coordinate={{
+                     latitude:  24.990220, 
+                     longitude : 121.344374,
+                  }}
+                  image={require('../assets/Map/map_marker.png')}
+                  title="泰皇泰式料理"
+                  description="open on 12:00–14:00、17:00–21:00 Every Tuesday close"
+                  ></Marker>
+
+                  <Marker
+                  style={styles.markerStyle}
+                  coordinate={{
+                     latitude:  24.988603, 
+                     longitude : 121.343284,
+                  }}
+                  image={require('../assets/Map/map_marker.png')}
+                  title="品誠豆花店"
+                  description="open on 13:00–23:00 Every Saturday close"
+                  ></Marker>
+                
+                <Marker
+                  style={styles.markerStyle}
+                  coordinate={{
+                     latitude: 24.990123, 
+                     longitude : 121.344677,
+                  }}
+                  image={require('../assets/Map/map_marker.png')}
+                  title="11番町豚骨拉麵"
+                  description="open on 13:00–23:00 Every Saturday close"
+                  ></Marker>
                 
             
                   
