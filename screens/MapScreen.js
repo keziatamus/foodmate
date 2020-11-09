@@ -136,10 +136,100 @@ export default function MapScreen(props) {
                   title="11番町豚骨拉麵"
                   description="open on 13:00–23:00 Every Saturday close"
                   ></Marker>
+
+                 <Marker
+                  style={styles.markerStyle}
+                  coordinate={{
+                     latitude:  24.988705, 
+                     longitude : 121.343393,
+                  }}
+                  image={require('../assets/Map/map_marker.png')}
+                  title="晨間廚房銘傳德明店"
+                  description="open on 06:00–13:00 Every Friday close"
+                  ></Marker>
+
+
+                  <Marker
+                  style={styles.markerStyle}
+                  coordinate={{
+                     latitude:  24.988510, 
+                     longitude : 121.343093,
+                  }}
+                  image={require('../assets/Map/map_marker.png')}
+                  title="樂活早午餐"
+                  description="open on 	07:00–14:00 "
+                  ></Marker>
+
+                <Marker
+                  style={styles.markerStyle}
+                  coordinate={{
+                     latitude:  24.988909, 
+                     longitude : 121.343896,
+                  }}
+                  image={require('../assets/Map/map_marker.png')}
+                  title="五味臭臭鍋"
+                  description="open on 10:00–23:00"
+                  ></Marker>
+
+                <Marker
+                  style={styles.markerStyle}
+                  coordinate={{
+                     latitude:  24.988744,
+                     longitude :  121.342951,
+                  }}
+                  image={require('../assets/Map/map_marker.png')}
+                  title="鮮味坊"
+                  description="open on 11:30–14:00  17:00–21:00"
+                  ></Marker>
+
+                <Marker
+                  style={styles.markerStyle}
+                  coordinate={{
+                     latitude:  24.988648, 
+                     longitude : 121.343047,
+                  }}
+                  image={require('../assets/Map/map_marker.png')}
+                  title="銘傳麥斯漢堡"
+                  description="open on 	06:30–14:00"
+                  ></Marker>
+
+                <Marker
+                  style={styles.markerStyle}
+                  coordinate={{
+                     latitude:  24.988823, 
+                     longitude : 121.342840,
+                  }}
+                  image={require('../assets/Map/map_marker.png')}
+                  title="醇滷味"
+                  description="open on 	12:00–23:00"
+                  ></Marker>
+
+                <Marker
+                  style={styles.markerStyle}
+                  coordinate={{
+                     latitude:  24.988325, 
+                     longitude : 121.343382,
+                  }}
+                  image={require('../assets/Map/map_marker.png')}
+                  title="蘿西媽媽漢堡(銘傳店)"
+                  description="open on 	06:30–13:30"
+                  ></Marker>
+
+                <Marker
+                  style={styles.markerStyle}
+                  coordinate={{
+                     latitude: 24.988563, 
+                     longitude :  121.343606,
+                  }}
+                  image={require('../assets/Map/map_marker.png')}
+                  title="羅媽媽牛肉麵鍋燒麵"
+                  description="open on 	11:00–22:00"
+                  ></Marker>
+
                 
             
                   
-            />
+        
             </MapView>
 
 
