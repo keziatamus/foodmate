@@ -226,6 +226,96 @@ export default function MapScreen(props) {
                   description="open on 	11:00–22:00"
                   ></Marker>
 
+               <Marker
+                  style={styles.markerStyle}
+                  coordinate={{
+                     latitude: 24.988663, 
+                     longitude :  121.343608 ,
+                  }}
+                  image={require('../assets/Map/map_marker.png')}
+                  title="大呼過癮臭臭鍋"
+                  description="open on 	11:00–23:00"
+                  ></Marker>
+
+               <Marker
+                  style={styles.markerStyle}
+                  coordinate={{
+                     latitude: 24.988801,
+                     longitude :   121.343739  ,
+                  }}
+                  image={require('../assets/Map/map_marker.png')}
+                  title="今晚吃雞（銘傳店）"
+                  description="open on 15:00–03:00"
+                  ></Marker>
+
+               <Marker
+                  style={styles.markerStyle}
+                  coordinate={{
+                     latitude: 24.988435,
+                     longitude :   121.343165,
+                  }}
+                  image={require('../assets/Map/map_marker.png')}
+                  title="高雄黑輪大王-桃園銘傳店"
+                  description="open on 	11:00–23:30"
+                  ></Marker>
+               
+               <Marker
+                  style={styles.markerStyle}
+                  coordinate={{
+                     latitude: 24.988221, 
+                     longitude :   121.343798,
+                  }}
+                  image={require('../assets/Map/map_marker.png')}
+                  title="幸福食堂複合式餐飲"
+                  description="open on 	07:00–20:00"
+                  ></Marker>
+
+               <Marker
+                  style={styles.markerStyle}
+                  coordinate={{
+                     latitude: 24.988115, 
+                     longitude :  121.343627,
+                  }}
+                  image={require('../assets/Map/map_marker.png')}
+                  title="香料小廚"
+                  description="open on 	12:00–14:00  17:00–20:30"
+                  ></Marker>
+                  
+               <Marker
+                  style={styles.markerStyle}
+                  coordinate={{
+                     latitude: 24.988240, 
+                     longitude : 121.343492,
+                  }}
+                  image={require('../assets/Map/map_marker.png')}
+                  title="雙醬咖哩"
+                  description="open on 	11:00–21:00"
+                  ></Marker>
+
+               <Marker
+                  style={styles.markerStyle}
+                  coordinate={{
+                     latitude: 24.988280, 
+                     longitude : 121.343449,
+                  }}
+                  image={require('../assets/Map/map_marker.png')}
+                  title="有食早午餐Sometimes Brunch"
+                  description="open on 	07:30–16:00"
+                  ></Marker>
+
+               <Marker
+                  style={styles.markerStyle}
+                  coordinate={{
+                     latitude: 24.988436, 
+                     longitude : 121.343573,
+                  }}
+                  image={require('../assets/Map/map_marker.png')}
+                  title="韓歐尼"
+                  description="open on 	11:30–21:30"
+                  ></Marker>
+
+
+
                 
             
                   
