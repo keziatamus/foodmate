@@ -110,11 +110,11 @@ export default class App extends React.Component {
           <Stack.Screen name="Edit Profile" component={EditProfile} 
             options={({route, navigation}) => ({ 
             headerBackTitle: 'Back',
-            headerRight:()=> (
-              <Button 
-              onPress={() => navigation.navigate("Profile")}
-              title="Save‎‎‏‏‎ ‎‏‏‎ ‎‏‏‎"/>
-            )
+            //headerRight:()=> (
+            //  <Button 
+            //  onPress={() => navigation.navigate("Profile")}
+            //  title="Save‎‎‏‏‎ ‎‏‏‎ ‎‏‏‎"/>
+            //)
             })}/>
           <Stack.Screen name="Personal Information" component={PersonalInfo} 
             options={({route, navigation}) => ({ 
