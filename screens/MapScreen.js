@@ -314,12 +314,20 @@ export default function MapScreen(props) {
                   description="open on 	11:30–21:30"
                   ></Marker>
 
+               <Marker
+                  style={styles.markerStyle}
+                  coordinate={{
+                     latitude: 24.988739, 
+                     longitude : 121.343440,
+                  }}
+                  image={require('../assets/Map/map_marker.png')}
+                  title="找兩圓 TWO COINS"
+                  description="Already closed"
+                  ></Marker>
 
-
-                
-            
                   
-        
+
+
             </MapView>
 
 
