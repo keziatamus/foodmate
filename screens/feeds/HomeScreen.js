@@ -1,18 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react';
 import * as Location from 'expo-location';
 import MapView from 'react-native-maps';
-import { StyleSheet, Text, View, Dimensions, Platform, ScrollView, FlatList } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, FlatList } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import TopCategories from './TopCategories';
 import Events from './Events';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import global from '../../global'
+import { TouchableHighlight } from 'react-native-gesture-handler';
 
-export default function HomeScreen(props) {
+export default function HomeScreen({ navigation }) {
+
   const [search, setSearch] = useState('');
   const [userPosition, setUserPosition] = useState(null);
   const mapRef = useRef(null);
-  let eventdata = [];
-  let event_n = null;
+  const [eventdata, setEventdata] = useState([]);
 
   useEffect(() => {
     getUserPosition();
@@ -23,9 +24,9 @@ export default function HomeScreen(props) {
       setTimeout(() => {
         mapRef.current.animateToRegion({
           latitude: userPosition.latitude + 0.002,
-          longitude: userPosition.longitude - 0.0042,
+          longitude: userPosition.longitude - 0.0045,
           latitudeDelta: 0.00422,
-          longitudeDelta: 0.00421,
+          longitudeDelta: 0.000421,
         }, 800);
       }, 100);
     }
@@ -51,38 +52,36 @@ export default function HomeScreen(props) {
     setSearch(value);
   }
 
-  useEffect(() => {
-    global.firebase
-      .database()
-      .ref('event')
-      .on('value', snapshot => {
-        var v = snapshot.val();
-        var data = [];
-        var n = 0;
-        for (var i in v) {
-          v[i].id = n + 1;
-          data.push(v[i]);
-          n++;
-        }
-        eventdata = data;
-        event_n = n;
-      });
+  function item_pressed(item) {
+    console.log(item + "item");
+    global.event = item;
+    console.log(global.event);
+    navigation.navigate("Join Event", { item: item });
   }
-  )
 
-  function eventbox(item) {
-    return (
-      <TouchableOpacity>
-        <Events
-          imageUri={require('../../assets/italian/2.jpg')}
-          title="I LOVE PASTA"
-          member="4"
-          date="Friday, August 7"
-          location="里吉拿義大利麵 Regina Pasta"
-        />
-      </TouchableOpacity >
-    )
-  };
+  useEffect(() => {
+    try {
+      global.firebase
+        .database()
+        .ref('event')
+        .on('value', (dataSnapshot) => {
+          let data = [];
+          dataSnapshot.forEach((child) => {
+            data.push({
+              eventID: child.val().eventID,
+              title: child.val().title,
+              member: child.val().member,
+              date: child.val().date,
+              location: child.val().place_name,
+              category: child.val().tags,
+            });
+          });
+          setEventdata(data);
+        });
+    } catch (error) {
+      alert(error);
+    }
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -124,6 +123,7 @@ export default function HomeScreen(props) {
                 <ScrollView
                   horizontal={true}
                   showsHorizontalScrollIndicator={false}>
+
                   <TopCategories
                     imageUri={require('../../assets/american/1.jpg')}
                     name="American"
@@ -179,17 +179,27 @@ export default function HomeScreen(props) {
                 <Text style={styles.titleText}>
                   Events
               </Text>
-                <View>
-                  <FlatList
-                    data={eventdata}
-                    renderItem={({ item }) => eventbox(item)}
-                  /></View>
+                <FlatList
+                  data={eventdata}
+                  inverted={true}
+                  renderItem={({ item }) =>
+                    (<TouchableHighlight
+                      onPress={() => item_pressed(item.eventID)}>
+                      <Events
+                        imageUri={item.category}
+                        title={item.title}
+                        member={item.member}
+                        date={item.date}
+                        location={item.location} />
+                    </TouchableHighlight>)}
+
+                />
               </View>
             </View>
           </ScrollView>
         </View>
       </ScrollView>
-    </View>
+    </View >
   )
 }
 
