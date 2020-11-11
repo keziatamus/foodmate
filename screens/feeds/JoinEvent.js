@@ -170,6 +170,7 @@ export default class App extends Component {
           <View style={{ alignItems: 'center', padding: 20 }}>
             <TouchableOpacity
               onPress={() => this.checkstatus()}
+              onPress={() => alert('You have joined an event!')}
               style={styles.joinBtn}>
               <Text style={{ fontSize: 15, fontWeight: 'bold' }}>Join</Text>
             </TouchableOpacity>
