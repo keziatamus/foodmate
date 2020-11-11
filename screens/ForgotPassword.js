@@ -23,7 +23,7 @@ export default function Reset({ navigation }) {
   return (
     <View style={styles.container}>
       <TouchableOpacity
-        onPress={() => this.props.navigation.goBack()}
+        onPress={() => navigation.goBack("Log In")}
         style={{ position: "absolute", left: 20, top: 40 }}
       >
         <Feather name="arrow-left" size={24} color="black" />
