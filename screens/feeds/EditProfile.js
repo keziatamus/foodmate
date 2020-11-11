@@ -1,27 +1,27 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, StyleSheet, Image, ImageBackground } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Image, ImageBackground, TouchableOpacity, Alert } from 'react-native';
 import { Container, Content } from 'native-base'
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
 import global from '../../global';
 //npm install yarn -g
-//expo install expo-image-picker
+//expo install expo-image-.
+
 
 export default class Edit extends Component {
   state = {
     image: null,
-    data: [],
     user: null,
-    username: null,
-    dob: null,
-    gender: null,
-    bio: null,
-    age: null,
-    email: null,
+    data: [],
+    username: "",
+    bio: "",
+    proimage: null,
+    loading: false,
   };
 
   componentDidMount() {
+
     global.firebase.auth().onAuthStateChanged(
       (user) => this.setState({ user: user })
     );
@@ -33,14 +33,46 @@ export default class Edit extends Component {
         console.log(data);
         this.setState({
           username: data.username,
-          dob: data.dob,
-          gender: data.gender,
-          bio: null,
-          age: null,
-          email: data.email,
+          bio: data.bio,
+          proimage: data.proimage,
         });
       });
     this.getPermissionAsync();
+  };
+
+
+  confirm_pressed() {
+    this.props.navigation.goBack('Profile');
+
+  };
+
+  onSavePress() {
+    global.firebase.database().ref('user/' + global.userkey).update(
+      {
+        username: this.state.username,
+        bio: this.state.bio,
+        proimage: global.userkey,
+      }
+    )
+      .then(() => {
+        this.setState({ error: '', loading: false });
+        this.confirm_pressed();
+      })
+      .catch(() => {
+        this.setState({ error: '', loading: false });
+        alert("Error")
+      });
+  }
+
+  renderButtonOrLoading() {
+    if (this.state.loading) {
+      return <Text>Loading</Text>
+    }
+    return <TouchableOpacity
+      style={styles.loginBtn}
+      onPress={this.onSavePress.bind(this)}>
+      <Text> Save </Text>
+    </TouchableOpacity>
   }
 
   getPermissionAsync = async () => {
@@ -52,30 +84,64 @@ export default class Edit extends Component {
     }
   };
 
-  _pickImage = async () => {
-    try {
-      let result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.All,
-        allowsEditing: true,
-        aspect: [4, 3],
-        quality: 1,
-      });
-      if (!result.cancelled) {
-        this.setState({ image: result.uri });
-      }
+  loadImage(image) {
+    var imageRef = global.firebase.storage().ref().child('proimage/' + image);
+    imageRef
+      .getDownloadURL()
+      .then((url) => {
+        //from url you can fetched the uploaded image easily
+        this.setState({ proimage: url });
+      })
+      .catch((e) => console.log('getting downloadURL of image error => ', e));
 
-      console.log(result);
-    } catch (E) {
-      console.log(E);
-    }
   };
 
+  upload = async (uri, imageName) => {
+    const response = await fetch(uri);
+    const blob = await response.blob();
+
+    var ref = global.firebase.storage().ref().child("proimage/" + imageName);
+    return ref.put(blob);
+  }
+
+  _pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.cancelled) {
+      this.upload(result.uri, global.userkey)
+        .catch((error) =>
+          console.log(error));
+      this.setState({
+        image: result.uri,
+        proimage: global.userkey
+      });
+    }
+
+    console.log(result);
+
+  };
   changeImage() {
 
   };
 
   render() {
+
+
     let { image } = this.state;
+
+    if (this.state.proimage == null) {
+      this.loadImage("blank-profile-picture.png");
+    }
+    else {
+      this.loadImage(this.state.proimage);
+    }
+
+
     return (
       <Container style={{ flex: 1, backgroundColor: 'white' }}>
         <Content>
@@ -84,7 +150,8 @@ export default class Edit extends Component {
               <ImageBackground
                 style={{ width: 90, height: 90, borderRadius: 45 }}
                 imageStyle={{ borderRadius: 45 }}
-                source={require('../../assets/me.jpg')}>
+                key={Date.now()}
+                source={this.state.proimage && { uri: this.state.proimage }}>
                 {image && <Image source={{ uri: image }} style={{ width: 90, height: 90, borderRadius: 45 }} />}
               </ImageBackground>
             </View>
@@ -112,10 +179,11 @@ export default class Edit extends Component {
                 <Text style={{ fontSize: 16, paddingLeft: 20, paddingRight: 50 }}>Username</Text>
                 <TextInput
                   style={{ fontSize: 16, width: '60%', paddingBottom: 15 }}
-                  defaultValue={this.state.username}
+                  value={this.state.username}
                   placeholder='Username'
                   borderBottomColor='#ebe6e6'
                   borderBottomWidth="1"
+                  onChangeText={username => this.setState({ username })}
                   clearButtonMode={true} />
               </View>
 
@@ -124,8 +192,10 @@ export default class Edit extends Component {
                 <TextInput
                   style={{ fontSize: 16, width: '60%', paddingBottom: 15 }}
                   placeholder="Add bio to your profile"
+                  value={this.state.bio}
                   borderBottomColor='#ebe6e6'
                   borderBottomWidth="1"
+                  onChangeText={bio => this.setState({ bio })}
                   clearButtonMode={true} />
               </View>
 
@@ -138,7 +208,15 @@ export default class Edit extends Component {
                 }}>
                 Personal Information Settings
                         </Text>
+              <View
+                style={{
+                  alignItems: "center",
+                }}>
+                {this.renderButtonOrLoading()}
+              </View>
+
             </View>
+
           </View>
         </Content>
       </Container>
@@ -152,5 +230,15 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  }
+  },
+  loginBtn: {
+    width: "80%",
+    backgroundColor: "#FBAF02",
+    borderRadius: 20,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 20,
+    marginBottom: 10
+  },
 })
