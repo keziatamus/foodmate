@@ -65,6 +65,49 @@ export default class App extends Component {
     member: null,
     place_name: null,
   };
+
+  userjoin() {
+    console.log(global.userkey);
+    global.firebase.database().ref('event/' + global.event + "/members").push(
+      global.userkey
+    )
+      ;
+    /*var ref = global.firebase.database().ref('event/' + global.event + "/members")
+       .on('value', snapshot => {
+         var data = snapshot.val();
+         //console.log(data);
+       });
+ var query = ref.orderByChild("database/event/" + global.event + "/members").equalTo(global.userkey);
+     query.once("value", function (snapshot) {
+       snapshot.forEach(function (child) {
+         console.log(child.key, "dupe");
+       });
+     });*/
+  };
+
+  checkstatus() {
+    global.firebase.auth().onAuthStateChanged(
+      (user) => this.setState({ user: user })
+    );
+    var tempmember = 0;
+    var ref = global.firebase.database().ref('event/' + global.event + '/members');
+    ref.orderByChild('id').on("value", function (snapshot) {
+      snapshot.forEach((data) => {
+        tempmember = tempmember + 1;
+        console.log(tempmember, member, data.val());
+        /* if (global.userkey = !data.val()) {
+           this.userjoin();
+           alert("Joined!");
+         }
+         else {
+           alert("You are already a member!");
+         }*/
+      })
+    })
+    if (tempmember == this.state.member) { console.log("full"); }
+    else { this.userjoin(); }
+  };
+
   componentDidMount() {
     global.firebase.auth().onAuthStateChanged(
       (user) => this.setState({ user: user })
@@ -74,7 +117,7 @@ export default class App extends Component {
       .ref('event/' + global.event)
       .on('value', snapshot => {
         var data = snapshot.val();
-        console.log(data);
+        //        console.log(data);
         this.setState({
           title: data.title,
           desc: data.desc,
@@ -82,6 +125,7 @@ export default class App extends Component {
           time: data.time,
           member: data.member,
           place_name: data.place_name,
+          image: data.image,
         });
       });
 
@@ -90,7 +134,9 @@ export default class App extends Component {
     return (
       <View style={{ flex: 1, backgroundColor: 'white' }}>
         <ImageBackground
-          source={require('../../assets/italian/2.jpg')}
+          source={this.state.image && {
+            uri: this.state.image
+          }}
           style={styles.image}
           imageStyle={{ borderBottomLeftRadius: 20, borderBottomRightRadius: 20 }}>
           <View style={styles.imageOverlay}>
@@ -122,7 +168,9 @@ export default class App extends Component {
           </View>
 
           <View style={{ alignItems: 'center', padding: 20 }}>
-            <TouchableOpacity style={styles.joinBtn}>
+            <TouchableOpacity
+              onPress={() => this.checkstatus()}
+              style={styles.joinBtn}>
               <Text style={{ fontSize: 15, fontWeight: 'bold' }}>Join</Text>
             </TouchableOpacity>
           </View>
