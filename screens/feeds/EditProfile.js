@@ -11,6 +11,7 @@ import global from '../../global';
 
 export default class Edit extends Component {
   state = {
+    isLoading: true,
     image: null,
     user: null,
     data: [],
@@ -20,7 +21,7 @@ export default class Edit extends Component {
     loading: false,
   };
 
-  componentDidMount() {
+  UNSAFE_componentWillMount() {
 
     global.firebase.auth().onAuthStateChanged(
       (user) => this.setState({ user: user })
@@ -30,7 +31,6 @@ export default class Edit extends Component {
       .ref('user/' + global.userkey)
       .on('value', snapshot => {
         var data = snapshot.val();
-        console.log(data);
         this.setState({
           username: data.username,
           bio: data.bio,
@@ -40,7 +40,17 @@ export default class Edit extends Component {
     this.getPermissionAsync();
   };
 
-
+  componentWillUnmount() {
+    global.firebase
+      .database()
+      .ref('user/' + global.userkey)
+      .on('value', snapshot => {
+        var data = snapshot.val();
+        this.setState({
+          proimage: data.proimage,
+        });
+      });
+  }
   confirm_pressed() {
     this.props.navigation.goBack('Profile');
 
@@ -51,7 +61,7 @@ export default class Edit extends Component {
       {
         username: this.state.username,
         bio: this.state.bio,
-        proimage: global.userkey,
+        proimage: this.state.proimage,
       }
     )
       .then(() => {
@@ -84,24 +94,20 @@ export default class Edit extends Component {
     }
   };
 
-  loadImage(image) {
-    var imageRef = global.firebase.storage().ref().child('proimage/' + image);
-    imageRef
-      .getDownloadURL()
+
+  upload = async (uri, imageName) => {
+
+    const response = await fetch(uri);
+    const blob = await response.blob();
+
+    var ref = global.firebase.storage().ref().child("proimage/" + imageName + ".png");
+    ref.getDownloadURL()
       .then((url) => {
         //from url you can fetched the uploaded image easily
         this.setState({ proimage: url });
       })
       .catch((e) => console.log('getting downloadURL of image error => ', e));
-
-  };
-
-  upload = async (uri, imageName) => {
-    const response = await fetch(uri);
-    const blob = await response.blob();
-
-    var ref = global.firebase.storage().ref().child("proimage/" + imageName);
-    return ref.put(blob);
+    return ref.putFile(blob);
   }
 
   _pickImage = async () => {
@@ -117,30 +123,17 @@ export default class Edit extends Component {
         .catch((error) =>
           console.log(error));
       this.setState({
-        image: result.uri,
-        proimage: global.userkey
+        image: result.uri
       });
     }
 
     console.log(result);
 
   };
-  changeImage() {
-
-  };
 
   render() {
 
-
     let { image } = this.state;
-
-    if (this.state.proimage == null) {
-      this.loadImage("blank-profile-picture.png");
-    }
-    else {
-      this.loadImage(this.state.proimage);
-    }
-
 
     return (
       <Container style={{ flex: 1, backgroundColor: 'white' }}>
