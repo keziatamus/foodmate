@@ -16,7 +16,15 @@ export default class LoginScreen extends React.Component {
   }
 
   login_pressed() {
-    console.log(this.state.user);
+    global.user = this.state.user;
+    console.log(global.user);
+    var usersRef = global.firebase.database().ref('user');
+    usersRef.orderByChild('UID').equalTo(global.user.uid).on("value", function (snapshot) {
+      console.log(snapshot.val());
+      snapshot.forEach(function (data) {
+        global.userkey = data.key;
+      });
+    });
     this.props.navigation.replace("Foodmate");
   };
 
@@ -49,7 +57,7 @@ export default class LoginScreen extends React.Component {
         <TouchableOpacity
           style={styles.loginBtn}
           onPress={() => this.login()}>
-          <Text style={{fontSize:14}}>Log In</Text>
+          <Text>Log In</Text>
         </TouchableOpacity>
         <TouchableOpacity>
           <Text onPress={() => this.props.navigation.navigate('Sign Up')}
@@ -103,7 +111,7 @@ const styles = StyleSheet.create({
   },
   forgot: {
     color: "#FBAF02",
-    fontSize: 12,
+    fontSize: 10,
     marginLeft: 200
   },
   loginBtn: {
@@ -117,7 +125,7 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   signUpText: {
-    fontSize: 14,
+    fontSize: 13,
     color: "#FBAF02"
   }
 });
