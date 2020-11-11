@@ -59,6 +59,7 @@ export default class SignUpScreen extends React.Component {
       email: this.state.email,
       dob: this.state.date,
       gender: this.state.selectedGender,
+      proimage: "https://firebasestorage.googleapis.com/v0/b/testfirebase-4f3dc.appspot.com/o/proimage%2Fblank-profile-picture.png?alt=media&token=07a92159-e50b-42cd-b9fd-5e1a4701b257",
     }
     )
   };
