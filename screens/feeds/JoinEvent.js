@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import {
   View, Text, StyleSheet, Image, ImageBackground,
   ScrollView, TouchableOpacity
@@ -55,6 +55,7 @@ export default class App extends Component {
 
   state = {
     data: [],
+    eventid: null,
     user: null,
     tags: null,
     title: null,
@@ -64,19 +65,17 @@ export default class App extends Component {
     member: null,
     place_name: null,
   };
-
   componentDidMount() {
     global.firebase.auth().onAuthStateChanged(
       (user) => this.setState({ user: user })
     );
     global.firebase
       .database()
-      .ref('event/-MHqTKt8iS8rtkGGFG0S')
+      .ref('event/' + global.event)
       .on('value', snapshot => {
         var data = snapshot.val();
         console.log(data);
         this.setState({
-          tags: data.tag,
           title: data.title,
           desc: data.desc,
           date: data.date,
