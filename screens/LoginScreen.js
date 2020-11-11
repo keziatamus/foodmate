@@ -36,7 +36,7 @@ export default class LoginScreen extends React.Component {
         <View style={styles.inputView} >
           <TextInput
             style={styles.inputText}
-            placeholder="Username"
+            placeholder="E-mail"
             placeholderTextColor="#707070"
             value={this.state.email}
             onChangeText={text => this.setState({ email: text })} />
