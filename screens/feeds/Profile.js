@@ -22,13 +22,25 @@ export default class Profile extends Component {
     };
 
     getAge() {
-
         var bd = (moment(this.state.dob, "DD-MM-YYYY").format("YYYY-MM-DD"));
         this.state.age = moment().diff(moment(bd), 'years')
     }
 
-    componentDidMount() {
+    renderavatar(uri) {
 
+        console.log("hi" + uri);
+        return (
+            <Image
+                source={uri && {
+                    uri: uri
+                }}
+                style={{ width: 90, height: 90, borderRadius: 45, resizeMode: 'stretch' }}
+
+            />
+        )
+    }
+
+    componentDidMount() {
         global.firebase.auth().onAuthStateChanged(
             (user) => this.setState({ user: user })
         );
@@ -37,8 +49,6 @@ export default class Profile extends Component {
             .ref('user/' + global.userkey)
             .on('value', snapshot => {
                 var data = snapshot.val();
-
-                console.log(data);
                 this.setState({
                     username: data.username,
                     dob: data.dob,
@@ -49,32 +59,23 @@ export default class Profile extends Component {
                     proimage: data.proimage,
                 });
             });
-
     };
 
-    loadImage(image) {
-
-        var imageRef = global.firebase.storage().ref().child('proimage/' + image);
-        imageRef
-            .getDownloadURL()
-            .then((url) => {
-                //from url you can fetched the uploaded image easily
-                this.setState({ proimage: url });
-            })
-            .catch((e) => console.log('getting downloadURL of image error => ', e));
-
-    };
+    UNSAFE_componentWillMount() {
+        global.firebase
+            .database()
+            .ref('user/' + global.userkey)
+            .on('value', snapshot => {
+                var data = snapshot.val();
+                this.setState({
+                    proimage: data.proimage,
+                });
+            });
+    }
 
     render() {
-
         this.getAge();
-
-        if (this.state.proimage == null) {
-            this.loadImage("blank-profile-picture.png");
-        }
-        else {
-            this.loadImage(this.state.proimage);
-        }
+        // console.log(this.state.proimage);
 
         return (
             <Container style={{ flex: 1, backgroundColor: 'white' }}>
@@ -83,13 +84,7 @@ export default class Profile extends Component {
                     <View>
                         <View style={{ flexDirection: 'row', padding: 10 }}>
                             <View style={{ flex: 1, padding: 10, alignItems: 'center' }}>
-                                <Image
-                                    source={this.state.proimage && {
-                                        key: Date.now(),
-                                        uri: this.state.proimage
-                                    }}
-                                    style={{ width: 90, height: 90, borderRadius: 45 }}
-                                />
+                                {this.renderavatar(this.state.proimage)}
                             </View>
                             <View style={{ flex: 3 }}>
                                 <View style={{
