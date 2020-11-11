@@ -7,7 +7,6 @@ import moment from 'moment'; //npm install moment --save
 //npm install native-base
 //npm install --save react-native-image-crop-picker
 
-
 export default class Profile extends Component {
 
     state = {
@@ -19,9 +18,17 @@ export default class Profile extends Component {
         bio: null,
         age: null,
         email: null,
+        proimage: null,
     };
 
+    getAge() {
+
+        var bd = (moment(this.state.dob, "DD-MM-YYYY").format("YYYY-MM-DD"));
+        this.state.age = moment().diff(moment(bd), 'years')
+    }
+
     componentDidMount() {
+
         global.firebase.auth().onAuthStateChanged(
             (user) => this.setState({ user: user })
         );
@@ -30,33 +37,59 @@ export default class Profile extends Component {
             .ref('user/' + global.userkey)
             .on('value', snapshot => {
                 var data = snapshot.val();
+
                 console.log(data);
                 this.setState({
                     username: data.username,
                     dob: data.dob,
                     gender: data.gender,
-                    bio: null,
+                    bio: data.bio,
                     age: null,
                     email: data.email,
+                    proimage: data.proimage,
                 });
             });
+
     };
 
-    getAge() {
-        var bd = (moment(this.state.dob, "DD-MM-YYYY").format("YYYY-MM-DD"));
-        this.state.age = moment().diff(moment(bd), 'years')
+    loadImage(image) {
+
+        var imageRef = global.firebase.storage().ref().child('proimage/' + image);
+        imageRef
+            .getDownloadURL()
+            .then((url) => {
+                //from url you can fetched the uploaded image easily
+                this.setState({ proimage: url });
+            })
+            .catch((e) => console.log('getting downloadURL of image error => ', e));
+
     };
 
     render() {
+
         this.getAge();
+
+        if (this.state.proimage == null) {
+            this.loadImage("blank-profile-picture.png");
+        }
+        else {
+            this.loadImage(this.state.proimage);
+        }
+
         return (
             <Container style={{ flex: 1, backgroundColor: 'white' }}>
+
                 <Content>
                     <View>
                         <View style={{ flexDirection: 'row', padding: 10 }}>
                             <View style={{ flex: 1, padding: 10, alignItems: 'center' }}>
-                                <Image source={require('../../assets/me.jpg')}
-                                    style={{ width: 90, height: 90, borderRadius: 45 }} />
+                                <Image
+                                    source={this.state.proimage && {
+                                        key: Date.now(),
+                                        uri: this.state.proimage
+                                    }}
+                                    style={{ width: 90, height: 90, borderRadius: 45 }}
+                                />
                             </View>
                             <View style={{ flex: 3 }}>
                                 <View style={{
@@ -82,7 +115,7 @@ export default class Profile extends Component {
 
                                 <View style={{ flexDirection: 'row' }}>
                                     <Button bordered light
-                                        onPress={() => this.props.navigation.navigate('Edit Profile')}
+                                        onPress={() => { this.props.navigation.navigate('Edit Profile') }}
                                         style={{ flex: 3, marginLeft: 10, marginRight: 10, justifyContent: 'center', height: 40 }}>
                                         <Text>Edit Profile</Text>
                                     </Button>
@@ -91,7 +124,7 @@ export default class Profile extends Component {
                         </View>
 
                         <View style={{ paddingHorizontal: 20 }}>
-                            <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{this.state.username}</Text>
+                            <Text style={{ fontSize: 16, fontWeight: 'bold', textTransform: 'capitalize', }}>{this.state.username}</Text>
                             <Text style={{ fontSize: 14, fontWeight: 'bold' }}>{this.state.gender}, {this.state.age}</Text>
                             <Text style={{ fontSize: 14, paddingTop: 5, paddingBottom: 15 }}>{this.state.bio}</Text>
                         </View>
@@ -177,4 +210,5 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center'
     },
+
 })
