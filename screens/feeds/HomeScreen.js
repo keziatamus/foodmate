@@ -6,7 +6,7 @@ import { SearchBar } from 'react-native-elements';
 import TopCategories from './TopCategories';
 import Events from './Events';
 import global from '../../global'
-import { TouchableHighlight } from 'react-native-gesture-handler';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function HomeScreen({ navigation }) {
 
@@ -53,9 +53,7 @@ export default function HomeScreen({ navigation }) {
   }
 
   function item_pressed(item) {
-    console.log(item + "item");
     global.event = item;
-    console.log(global.event);
     navigation.navigate("Join Event", { item: item });
   }
 
@@ -74,6 +72,7 @@ export default function HomeScreen({ navigation }) {
               date: child.val().date,
               location: child.val().place_name,
               category: child.val().tags,
+              eventimage: child.val().image,
             });
           });
           setEventdata(data);
@@ -183,15 +182,19 @@ export default function HomeScreen({ navigation }) {
                   data={eventdata}
                   inverted={true}
                   renderItem={({ item }) =>
-                    (<TouchableHighlight
-                      onPress={() => item_pressed(item.eventID)}>
-                      <Events
-                        imageUri={item.category}
-                        title={item.title}
-                        member={item.member}
-                        date={item.date}
-                        location={item.location} />
-                    </TouchableHighlight>)}
+                    (
+                      <TouchableOpacity
+                        style={styles.events}
+                        onPress={() => item_pressed(item.eventID)}>
+                        <Events
+                          imageUri={item.eventimage}
+                          title={item.title}
+                          member={item.member}
+                          date={item.date}
+                          location={item.location} />
+                      </TouchableOpacity>
+
+                    )}
 
                 />
               </View>
@@ -207,6 +210,9 @@ export default function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'white',
+  },
+  events: {
     backgroundColor: 'white',
   },
   titleText: {
