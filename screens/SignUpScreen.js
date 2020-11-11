@@ -105,9 +105,8 @@ export default class SignUpScreen extends React.Component {
         });
 
     }
-
-
   }
+
   renderButtonOrLoading() {
     if (this.state.loading) {
       return <Text>Loading</Text>
@@ -118,6 +117,20 @@ export default class SignUpScreen extends React.Component {
       <Text> Confirm </Text>
     </TouchableOpacity>
   }
+
+  back() {
+    this.props.navigation.goBack("Log In");
+  }
+
+  backbutton() {
+    return (
+      <TouchableOpacity
+        onPress={this.back.bind(this)}
+        style={{ position: 'absolute', left: 20, top: 40 }}>
+        <Feather name='arrow-left' size={24} color='black' />
+      </TouchableOpacity>)
+  }
+
   render() {
     const placeholder = {
       label: 'Select gender',
@@ -128,11 +141,7 @@ export default class SignUpScreen extends React.Component {
     return (
 
       <SafeAreaView style={styles.container}>
-        <TouchableOpacity
-          onPress={() => this.props.navigation.goBack()}
-          style={{ position: 'absolute', left: 20, top: 40 }}>
-          <Feather name='arrow-left' size={24} color='black' />
-        </TouchableOpacity>
+        {this.backbutton()}
         <View style={styles.signUpView}>
           <Text style={styles.signUpText}> Sign Up</Text>
         </View>
