@@ -3,7 +3,7 @@ import { View, FlatList, SafeAreaView, StatusBar, StyleSheet, Text, TouchableHig
 import Events from './screens/feeds/Events';
 import global from './global'
 
-export default class App extends React.Component {
+class ShowEvent extends Component {
     state = {
         eventdata: [],
     };
@@ -27,13 +27,6 @@ export default class App extends React.Component {
 
     render() {
         console.log(this.state.eventdata);
-        if (this.state.eventdata.length == 0)
-            return (
-                <SafeAreaView style={styles.container}>
-                    <Text>Loading</Text>
-                </SafeAreaView>
-            );
-
         return (
             <View style={styles.container}>
                 <FlatList
@@ -60,7 +53,9 @@ export default class App extends React.Component {
     }
 }
 
-const styles = StyleSheet.create({
+export default ShowEvent;
+
+const styles = StyleSheet.create({   
     container: {
         flex: 1,
     },
