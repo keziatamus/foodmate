@@ -167,7 +167,7 @@ export default class App extends Component {
 
           </View>
 
-          <View style={{ alignItems: 'center', padding: 20 }}>
+          <View style={{ alignItems: 'center', padding: 2 }}>
             <TouchableOpacity
               onPress={() => this.checkstatus()}
               onPress={() => alert('You have joined an event!')}
@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
     width: '80%',
     backgroundColor: '#FBAF02',
     borderRadius: 20,
-    padding: 15,
+    padding: 20,
     alignItems: 'center',
   },
 });
