@@ -15,7 +15,7 @@ class Edit extends Component{
                         <TextInput
                             style={{fontSize: 16, width:'60%', paddingBottom:15}}
                             defaultValue="jenniekim@gmail.com"
-                            placeholder='Email'
+                            placeholder='E-mail'
                             borderBottomColor='#ebe6e6'
                             borderBottomWidth="1"
                             clearButtonMode={true}/>
