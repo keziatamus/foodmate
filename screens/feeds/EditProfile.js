@@ -173,7 +173,7 @@ export default class Edit extends Component {
                 <TextInput
                   style={{ fontSize: 16, width: '60%', paddingBottom: 15 }}
                   value={this.state.username}
-                  placeholder='Username'
+                  placeholder='E-mail'
                   borderBottomColor='#ebe6e6'
                   borderBottomWidth="1"
                   onChangeText={username => this.setState({ username })}
