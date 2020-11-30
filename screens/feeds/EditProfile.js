@@ -21,7 +21,7 @@ export default class Edit extends Component {
     loading: false,
   };
 
-  UNSAFE_componentWillMount() {
+  componentWillMount() {
 
     global.firebase.auth().onAuthStateChanged(
       (user) => this.setState({ user: user })
@@ -34,23 +34,25 @@ export default class Edit extends Component {
         this.setState({
           username: data.username,
           bio: data.bio,
-          proimage: data.proimage,
         });
       });
+    this.getavatar(global.userkey);
     this.getPermissionAsync();
   };
 
-  componentWillUnmount() {
-    global.firebase
-      .database()
-      .ref('user/' + global.userkey)
-      .on('value', snapshot => {
-        var data = snapshot.val();
-        this.setState({
-          proimage: data.proimage,
-        });
+  getavatar(image) {
+    var ref = global.firebase.storage().ref().child("proimage/" + image + ".png");
+    ref.getDownloadURL()
+      .then((url) => {
+        //from url you can fetched the uploaded image easily
+        this.setState({ proimage: url });
+      })
+      .catch((e) => {
+        console.log('getting downloadURL of image error => ', e);
+        this.setState({ proimage: "https://firebasestorage.googleapis.com/v0/b/testfirebase-4f3dc.appspot.com/o/proimage%2Fblank-profile-picture.png?alt=media&token=07a92159-e50b-42cd-b9fd-5e1a4701b257" })
       });
   }
+
   confirm_pressed() {
     this.props.navigation.goBack('Profile');
 
@@ -94,7 +96,6 @@ export default class Edit extends Component {
     }
   };
 
-
   upload = async (uri, imageName) => {
 
     const response = await fetch(uri);
@@ -107,7 +108,7 @@ export default class Edit extends Component {
         this.setState({ proimage: url });
       })
       .catch((e) => console.log('getting downloadURL of image error => ', e));
-    return ref.putFile(blob);
+    return ref.put(blob);
   }
 
   _pickImage = async () => {
@@ -133,7 +134,7 @@ export default class Edit extends Component {
 
   render() {
 
-    let { image } = this.state;
+    let image = this.state.proimage;
 
     return (
       <Container style={{ flex: 1, backgroundColor: 'white' }}>
@@ -144,8 +145,10 @@ export default class Edit extends Component {
                 style={{ width: 90, height: 90, borderRadius: 45 }}
                 imageStyle={{ borderRadius: 45 }}
                 key={Date.now()}
-                source={this.state.proimage && { uri: this.state.proimage }}>
-                {image && <Image source={{ uri: image }} style={{ width: 90, height: 90, borderRadius: 45 }} />}
+                source={image && { uri: image }}>
+                {image && <Image
+                  source={{ uri: image }}
+                  style={{ width: 90, height: 90, borderRadius: 45 }} />}
               </ImageBackground>
             </View>
             <Text
