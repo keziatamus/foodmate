@@ -42,6 +42,7 @@ export default class Members extends Component {
     };
 
     render() {
+        console.log(this.state.members);
         return (
             <Container style={{ flex: 1, backgroundColor: 'white' }}>
                 <Content>
