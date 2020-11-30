@@ -5,7 +5,8 @@ import {
 } from 'react-native';
 import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
-import { render } from 'react-dom';
+
+import global from '../../global';
 
 const ICON_COLOR = '#FBAF02';
 const ICON_SIZE = 24;
@@ -66,46 +67,37 @@ export default class App extends Component {
     place_name: null,
   };
 
+  pushtouser() {
+    global.firebase.database().ref('user/' + global.userkey + "/joinedevent").push(
+      { id: global.event }
+    );
+  }
+
   userjoin() {
-    console.log(global.userkey);
     global.firebase.database().ref('event/' + global.event + "/members").push(
       global.userkey
-    )
-      ;
-    /*var ref = global.firebase.database().ref('event/' + global.event + "/members")
-       .on('value', snapshot => {
-         var data = snapshot.val();
-         //console.log(data);
-       });
- var query = ref.orderByChild("database/event/" + global.event + "/members").equalTo(global.userkey);
-     query.once("value", function (snapshot) {
-       snapshot.forEach(function (child) {
-         console.log(child.key, "dupe");
-       });
-     });*/
+    );
+    alert("Joined!");
   };
 
   checkstatus() {
-    global.firebase.auth().onAuthStateChanged(
-      (user) => this.setState({ user: user })
-    );
     var tempmember = 0;
+    var check = false;
     var ref = global.firebase.database().ref('event/' + global.event + '/members');
     ref.orderByChild('id').on("value", function (snapshot) {
       snapshot.forEach((data) => {
         tempmember = tempmember + 1;
-        console.log(tempmember, member, data.val());
-        /* if (global.userkey = !data.val()) {
-           this.userjoin();
-           alert("Joined!");
-         }
-         else {
-           alert("You are already a member!");
-         }*/
+        if (data.val() == global.userkey) { check = true; }
       })
     })
-    if (tempmember == this.state.member) { console.log("full"); }
-    else { this.userjoin(); }
+    if (tempmember == this.state.member) { alert("Sorry! The event is full."); }
+    else {
+      if (check == false) {
+        this.userjoin();
+        this.pushtouser();
+      }
+      else { alert("You are already a member!") }
+    }
   };
 
   componentDidMount() {
@@ -131,6 +123,7 @@ export default class App extends Component {
 
   };
   render() {
+    console.log(global.userkey);
     return (
       <View style={{ flex: 1, backgroundColor: 'white' }}>
         <ImageBackground
@@ -167,10 +160,9 @@ export default class App extends Component {
 
           </View>
 
-          <View style={{ alignItems: 'center', padding: 2 }}>
+          <View style={{ alignItems: 'center', padding: 20 }}>
             <TouchableOpacity
               onPress={() => this.checkstatus()}
-              onPress={() => alert('You have joined an event!')}
               style={styles.joinBtn}>
               <Text style={{ fontSize: 15, fontWeight: 'bold' }}>Join</Text>
             </TouchableOpacity>
@@ -243,7 +235,7 @@ const styles = StyleSheet.create({
     width: '80%',
     backgroundColor: '#FBAF02',
     borderRadius: 20,
-    padding: 20,
+    padding: 15,
     alignItems: 'center',
   },
 });
