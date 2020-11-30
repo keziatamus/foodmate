@@ -57,6 +57,10 @@ export default function HomeScreen({ navigation }) {
     navigation.navigate("Join Event", { item: item });
   }
 
+  function top_pressed(item) {
+    navigation.navigate("Top categories list", { item: item });
+  }
+
   useEffect(() => {
     try {
       global.firebase
@@ -126,51 +130,64 @@ export default function HomeScreen({ navigation }) {
                   <TopCategories
                     imageUri={require('../../assets/american/1.jpg')}
                     name="American"
-                    menu="Hamburger, Fries, Clam Chowder, Deep-Dish Pizza, and more." />
+                    menu="Hamburger, Fries, Clam Chowder, Deep-Dish Pizza, and more."
+                    onPress={() => top_pressed("American")}
+                  />
                   <TopCategories
                     imageUri={require('../../assets/italian/1.jpg')}
                     name="Italian"
-                    menu="Spaghetti, Lasagna, Risotto, Pizza, Ossobuco, Gelato, and more." />
+                    menu="Spaghetti, Lasagna, Risotto, Pizza, Ossobuco, Gelato, and more."
+                    onPress={() => top_pressed("Italian")} />
                   <TopCategories
                     imageUri={require('../../assets/french/1.jpg')}
                     name="French"
-                    menu="French toast, Ratatouille, Crêpes, Soufflé, Cassoulet, and more." />
+                    menu="French toast, Ratatouille, Crêpes, Soufflé, Cassoulet, and more."
+                    onPress={() => top_pressed("French")} />
                   <TopCategories
                     imageUri={require('../../assets/mexican/1.jpg')}
                     name="Mexican"
-                    menu="Burritos, Guacamole, Enchiladas, Quesadillas, Salsa, and more." />
+                    menu="Burritos, Guacamole, Enchiladas, Quesadillas, Salsa, and more."
+                    onPress={() => top_pressed("Mexican")} />
                   <TopCategories
                     imageUri={require('../../assets/korean/1.jpg')}
                     name="Korean"
-                    menu="Bulgogi, Bibimbap, Ddukbokki, Kimchi, Japchae, and more." />
+                    menu="Bulgogi, Bibimbap, Ddukbokki, Kimchi, Japchae, and more."
+                    onPress={() => top_pressed("Korean")} />
                   <TopCategories
                     imageUri={require('../../assets/japanese/1.jpg')}
                     name="Japanese"
-                    menu="Sushi, Sashimi, Tempura, Soba, Udon, Onigri, Yakitori, and more." />
+                    menu="Sushi, Sashimi, Tempura, Soba, Udon, Onigri, Yakitori, and more."
+                    onPress={() => top_pressed("Japanese")} />
                   <TopCategories
                     imageUri={require('../../assets/chinese/1.jpg')}
                     name="Chinese"
-                    menu="Hotpot, Sichuan Pork, Sweet and Sour Pork, Fried Noodle, and more." />
+                    menu="Hotpot, Sichuan Pork, Sweet and Sour Pork, Fried Noodle, and more."
+                    onPress={() => top_pressed("Chinese")} />
                   <TopCategories
                     imageUri={require('../../assets/hongkong/1.jpg')}
                     name="Hong Kong"
-                    menu="Wontons, Roast Goose, Fish Balls, Har Gow, Chickens' Feet, and more." />
+                    menu="Wontons, Roast Goose, Fish Balls, Har Gow, Chickens' Feet, and more."
+                    onPress={() => top_pressed("Hong Kong")} />
                   <TopCategories
                     imageUri={require('../../assets/taiwanese/1.jpg')}
                     name="Taiwanese"
-                    menu="Beef Noodles, Dumplings, Minced Pork Rice, Stinky Tofu, and more." />
+                    menu="Beef Noodles, Dumplings, Minced Pork Rice, Stinky Tofu, and more."
+                    onPress={() => top_pressed("Taiwanese")} />
                   <TopCategories
                     imageUri={require('../../assets/thai/1.jpg')}
                     name="Thai"
-                    menu="Tom Yum Goong, Som Tum, Pad Thai, Khao Pad, and more." />
+                    menu="Tom Yum Goong, Som Tum, Pad Thai, Khao Pad, and more."
+                    onPress={() => top_pressed("Thai")} />
                   <TopCategories
                     imageUri={require('../../assets/indian/1.jpg')}
                     name="Indian"
-                    menu="Biryani, Butter Chicken, Tandoori Chicken, aFlatbread, and more." />
+                    menu="Biryani, Butter Chicken, Tandoori Chicken, aFlatbread, and more."
+                    onPress={() => top_pressed("Indian")} />
                   <TopCategories
                     imageUri={require('../../assets/indonesian/1.jpg')}
                     name="Indonesian"
-                    menu="Satay, Fried Rice, Beef Rendang, Sop Buntut, Soto Ayam, and more." />
+                    menu="Satay, Fried Rice, Beef Rendang, Sop Buntut, Soto Ayam, and more."
+                    onPress={() => top_pressed("Indonesian")} />
                 </ScrollView>
               </View>
 
