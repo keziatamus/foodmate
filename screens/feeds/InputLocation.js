@@ -19,6 +19,7 @@ export default class App extends Component {
             components: 'country:tw'
           }}
           onPress={(data = null) => {
+            console.log(data);
             if (data.name) {
               global.firebase.database().ref('event/' + global.event).update(
                 {
@@ -31,6 +32,7 @@ export default class App extends Component {
               global.firebase.database().ref('event/' + global.event).update(
                 {
                   place_id: data.place_id,
+                  place_name: data.description
                 }
               )
             }
