@@ -87,10 +87,10 @@ export default class App extends React.Component {
       selecteddate: "",
       selectedtime: "",
       location: "Restaurant",
+      eventimage: "",
       user: "",
       error: '',
       loading: false,
-
     };
   }
 
@@ -107,10 +107,21 @@ export default class App extends React.Component {
   }
 
   pushtouser() {
-    global.firebase.database().ref('user/' + global.userkey + "/currentevent").push(
+    global.firebase.database().ref('user/' + global.userkey + "/createdevent").push(
       { id: global.event }
     );
   }
+
+  loadImage(value) {
+    var imageRef = global.firebase.storage().ref().child('tags/' + value + '.jpg');
+    imageRef
+      .getDownloadURL()
+      .then((url) => {
+        //from url you can fetched the uploaded image easily
+        this.setState({ eventimage: url });
+      })
+      .catch((e) => console.log('getting downloadURL of image error => ', e));
+  };
 
   onConfirmPress() {
     this.setState({ error: '', loading: true });
@@ -130,7 +141,7 @@ export default class App extends React.Component {
       alert('Please select date and time')
       this.setState({ loading: false });
     }
-    else if (this.state.selectedMember == "") {
+    else if (this.state.selectedMember == null) {
       alert('Please select amount of members')
       this.setState({ loading: false });
     }
@@ -139,7 +150,6 @@ export default class App extends React.Component {
       const key = ref.key;
       global.event = key;
       ref.set({
-        createBy: global.userkey,
         eventID: key,
         tags: this.state.selectedTag,
         title: this.state.title,
@@ -147,6 +157,8 @@ export default class App extends React.Component {
         date: this.state.selecteddate,
         time: this.state.selectedtime,
         member: this.state.selectedMember,
+        members: { id: global.userkey },
+        image: this.state.eventimage,
         location: "",
       })
         .then(() => {
@@ -204,6 +216,7 @@ export default class App extends React.Component {
             this.setState({
               selectedTag: value,
             });
+            this.loadImage(value);
           }}
           onUpArrow={() => {
             this.inputRefs.firstTextInput.focus();
@@ -218,21 +231,6 @@ export default class App extends React.Component {
           }}
         />
 
-        <View style={styles.inputView} >
-          <TextInput
-            style={styles.inputText}
-            placeholder="Title"
-            placeholderTextColor="#707070"
-            onChangeText={text => this.setState({ title: text })} />
-        </View>
-
-        <View style={styles.inputView} >
-          <TextInput
-            style={styles.inputText}
-            placeholder="Description"
-            placeholderTextColor="#707070"
-            onChangeText={text => this.setState({ desc: text })} />
-        </View>
 
         <DatePicker
           showIcon={false}
@@ -261,11 +259,29 @@ export default class App extends React.Component {
             }
           }}
           onDateChange={(date) => {
-            this.setState({ date: date });
-            this.setState({ selecteddate: getDate(date) });
-            this.setState({ selectedtime: getTime(date) });
+            this.setState({
+              date: date,
+              selecteddate: getDate(date),
+              selectedtime: getTime(date)
+            });
           }}
         />
+
+        <View style={styles.inputView} >
+          <TextInput
+            style={styles.inputText}
+            placeholder="Title"
+            placeholderTextColor="#707070"
+            onChangeText={text => this.setState({ title: text })} />
+        </View>
+
+        <View style={styles.inputView} >
+          <TextInput
+            style={styles.inputText}
+            placeholder="Description"
+            placeholderTextColor="#707070"
+            onChangeText={text => this.setState({ desc: text })} />
+        </View>
 
         <RNPickerSelect
           placeholder={placeholder_2}
@@ -353,7 +369,7 @@ const pickerSelectStyles = StyleSheet.create({
   inputIOS: {
     alignSelf: 'center',
     width: '80%',
-    backgroundColor: "#FAF7F0",
+    backgroundColor: "#FAF9F0",
     borderRadius: 20,
     padding: 20,
     fontSize: 15,
