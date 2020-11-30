@@ -1,33 +1,21 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import global from '../../global';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-
-import { Container, Content, Header, Left, Body, Right, Button } from 'native-base'
+import { Container } from 'native-base'
 
 const Events = ({ imageUri, title, member, date, location }) => {
   //console.log(imageUri);
-  var uri;
-  var imageRef = global.firebase.storage().ref().child('tags/' + imageUri + '.jpg');
-  imageRef
-    .getDownloadURL()
-    .then((url) => {
-      //from url you can fetched the uploaded image easily
-      uri = url;
-      console.log(title + uri);
-    })
-    .catch((e) => console.log('getting downloadURL of image error => ', e));
-
 
   return (
-    <Container style={{ width: '90%', height: 300, marginLeft: 20 }}>
-      <View style={{ flex: 3 }}>
+    <Container style={{ width: '90%', height: 300, marginLeft: 20, }}>
+      <View style={{ flex: 3, }}>
         <Image
-          source={uri && {
-            uri: uri
+          source={imageUri && {
+            uri: imageUri
           }}
-          style={{ flex: 1, width: null, height: null, resizeMode: 'cover', borderRadius: 10, marginVertical: 10 }}
+          style={{
+            flex: 1, width: null, height: null, resizeMode: 'cover', borderRadius: 10, marginVertical: 10
+          }}
         />
       </View>
       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -54,5 +42,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+
   }
 })
