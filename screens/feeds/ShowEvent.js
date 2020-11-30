@@ -1,9 +1,11 @@
+
 import React, { useState } from "react";
-import { View, FlatList, SafeAreaView, StatusBar, StyleSheet, Text, TouchableHighlight } from "react-native";
+import { View, FlatList, StyleSheet, Text, TouchableHighlight } from "react-native";
 import Events from './screens/feeds/Events';
 import global from './global'
 
-class ShowEvent extends Component {
+
+class ShowEvent extends React.Component {
     state = {
         eventdata: [],
     };
@@ -26,13 +28,26 @@ class ShowEvent extends Component {
     }
 
     render() {
-        console.log(this.state.eventdata);
         return (
             <View style={styles.container}>
                 <FlatList
                     data={this.state.eventdata}
                     inverted={true}
-                    renderItem={({ item }) => this.renderItem(item)}
+                    renderItem={({ item }) =>
+                        (
+                            <TouchableOpacity
+                                style={styles.events}
+                            //onPress={() => item_pressed(item.eventID)}
+                            >
+                                <Events
+                                    imageUri={item.eventimage}
+                                    title={item.title}
+                                    member={item.member}
+                                    date={item.date}
+                                    location={item.location} />
+                            </TouchableOpacity>
+
+                        )}
                 />
             </View>
         );
@@ -43,7 +58,7 @@ class ShowEvent extends Component {
         return (
             <TouchableHighlight onPress={() => this.item_pressed(item)}>
                 <Events
-                    imageUri={require('./assets/italian/2.jpg')}
+                    imageUri={item.image}
                     title={item.title}
                     member={item.member}
                     date={item.date}
@@ -55,7 +70,7 @@ class ShowEvent extends Component {
 
 export default ShowEvent;
 
-const styles = StyleSheet.create({   
+const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
