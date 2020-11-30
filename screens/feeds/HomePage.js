@@ -1,20 +1,13 @@
 import * as React from 'react';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { MaterialIcons } from '@expo/vector-icons'; 
-import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import MapScreen from '../MapScreen';
 import HomeScreen from './HomeScreen';
 import CreateScreen from './CreateEvent';
 import Profile from './Profile';
-
-function Chat() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Chat!</Text>
-    </View>
-  );
-}
+import Chat from './Chat';
 
 const Tab = createBottomTabNavigator();
 
@@ -26,7 +19,7 @@ export default function MyTabs() {
         activeTintColor: '#FBAF02',
       }}
     >
-    <Tab.Screen
+      <Tab.Screen
         name="Map"
         component={MapScreen}
         options={{
@@ -36,7 +29,7 @@ export default function MyTabs() {
           ),
         }}
       />
-    <Tab.Screen
+      <Tab.Screen
         name="Create"
         component={CreateScreen}
         options={{
@@ -46,7 +39,7 @@ export default function MyTabs() {
           ),
         }}
       />
-    <Tab.Screen
+      <Tab.Screen
         name="Home"
         component={HomeScreen}
         options={{
@@ -56,7 +49,7 @@ export default function MyTabs() {
           ),
         }}
       />
-    <Tab.Screen
+      <Tab.Screen
         name="Chat"
         component={Chat}
         options={{
@@ -66,7 +59,7 @@ export default function MyTabs() {
           ),
         }}
       />
-    <Tab.Screen
+      <Tab.Screen
         name="Profile"
         component={Profile}
         options={{
@@ -81,14 +74,14 @@ export default function MyTabs() {
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    mapStyle: {
-      width: Dimensions.get('window').width,
-      height: Dimensions.get('window').height,
-    },
-  });
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  mapStyle: {
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height,
+  },
+});
