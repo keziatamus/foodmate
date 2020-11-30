@@ -82,6 +82,7 @@ export default class App extends Component {
           time: data.time,
           member: data.member,
           place_name: data.place_name,
+          image: data.image,
         });
       });
 
@@ -90,7 +91,9 @@ export default class App extends Component {
     return (
       <View style={{ flex: 1, backgroundColor: 'white' }}>
         <ImageBackground
-          source={require('../../assets/italian/2.jpg')}
+          source={this.state.image && {
+            uri: this.state.image
+          }}
           style={styles.image}
           imageStyle={{ borderBottomLeftRadius: 20, borderBottomRightRadius: 20 }}>
           <View style={styles.imageOverlay}>
@@ -100,16 +103,11 @@ export default class App extends Component {
           <Text style={styles.description}>{this.state.desc}</Text>
 
           <TouchableOpacity
-            onPress={() => this.props.navigation.goBack()}
-            style={{ position: 'absolute', left: 20, top: 40 }}>
-            <Feather name='arrow-left' size={24} color='#fff' />
-          </TouchableOpacity>
-
-          <TouchableOpacity
             onPress={() => this.props.navigation.navigate("Home")}
             style={{ position: 'absolute', right: 20, top: 40 }}>
             <MaterialIcons name='home' size={24} color='#fff' />
           </TouchableOpacity>
+
 
         </ImageBackground>
 
